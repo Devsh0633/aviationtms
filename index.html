@@ -353,11 +353,12 @@ nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(2
 /* ── IMPACT ────────────────────────────────────── */
 .impact-s{padding:7rem 0;background:var(--bg);position:relative;overflow:hidden}
 .impact-s::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 20% 50%,rgba(123,69,232,.03),transparent 60%),radial-gradient(ellipse 40% 60% at 80% 50%,rgba(0,201,255,.02),transparent 60%)}
-.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1;margin-top:2.5rem}
-.icard{padding:2rem 1.5rem;text-align:center;background:var(--card);border-radius:16px;border:1px solid var(--border);transition:transform .3s,border-color .3s}
-.icard:hover{transform:translateY(-4px);border-color:var(--bm)}
-.inum{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;line-height:1;margin-bottom:.75rem}
-.ilbl{font-size:13px;color:var(--muted);line-height:1.5}
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative;z-index:1;margin-top:3.5rem}
+.icard{padding:2.5rem 2rem;text-align:left;background:var(--card);border-radius:20px;border:1px solid var(--border);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;display:flex;flex-direction:column;gap:10px}
+.icard:hover{transform:translateY(-5px);border-color:rgba(255, 107, 53, 0.25);box-shadow:0 12px 30px rgba(0,0,0,0.25)}
+.inum{font-size:3rem;font-weight:800;line-height:1;background:linear-gradient(135deg,#FF6B35 0%,#FF8C5A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ilbl{font-size:18px;font-weight:700;color:#FFF}
+.idesc{font-size:14px;color:var(--muted);line-height:1.6}
 
 /* ── RATINGS ───────────────────────────────────── */
 .rate-s{padding:7rem 0;background:var(--bg2)}
@@ -914,15 +915,47 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 <section class="impact-s">
   <div class="c">
     <div class="sh reveal" style="position:relative;z-index:1">
-      <div class="slabel">The Impact</div>
-      <h2>What changes when<br><span class="grad">everything is connected.</span></h2>
-      <p style="color:var(--muted);font-size:15px;max-width:500px;margin:1rem auto 0">Outcomes reported by aviation operators who moved from disconnected tools to one platform.</p>
+      <div class="slabel">Strategic Impact</div>
+      <h2>A Unified Platform Built For<br><span class="grad">Aviation Operational Excellence.</span></h2>
+      <p style="color:var(--muted);font-size:15px;max-width:600px;margin:1rem auto 0">Eliminate fragmented systems. See how connecting your scheduling, compliance, and training directly optimizes your bottom line.</p>
     </div>
     <div class="igrid">
-      <div class="icard reveal"><div class="inum" style="color:var(--orange)">−85%</div><div class="ilbl">Training admin time — scheduling, tracking, and reporting</div></div>
-      <div class="icard reveal" style="transition-delay:.1s"><div class="inum" style="color:var(--purple-l)">100%</div><div class="ilbl">Audit pass rate maintained by aviation operator clients</div></div>
-      <div class="icard reveal" style="transition-delay:.2s"><div class="inum" style="color:var(--cyan)">−98%</div><div class="ilbl">Time to generate a full compliance report</div></div>
-      <div class="icard reveal" style="transition-delay:.3s"><div class="inum" style="color:var(--emerald)">25%</div><div class="ilbl">Reduction in platform and admin overhead in year one</div></div>
+      <!-- C1: Operational Efficiency -->
+      <div class="icard reveal">
+        <div class="inum">+45%</div>
+        <div class="ilbl">Operational Efficiency</div>
+        <div class="idesc">Eliminate scheduling bottlenecks. Seamlessly plan multi-base crew schedules, instructor availability, and simulator allocations in one central view.</div>
+      </div>
+      <!-- C2: Cost Reduction -->
+      <div class="icard reveal" style="transition-delay:.05s">
+        <div class="inum">−30%</div>
+        <div class="ilbl">Platform &amp; Admin Overhead</div>
+        <div class="idesc">Consolidate disconnected training systems, eliminate paper logs, automate manual spreadsheets, and immediately reduce software licensing fees.</div>
+      </div>
+      <!-- C3: Revenue Growth -->
+      <div class="icard reveal" style="transition-delay:.1s">
+        <div class="inum">+12%</div>
+        <div class="ilbl">Active Fleet Utility</div>
+        <div class="idesc">Accelerate pilot type rating renewals, MRO certifications, and flight attendant onboarding to optimize active crew capacity and drive higher flight hours.</div>
+      </div>
+      <!-- C4: Compliance Tracking -->
+      <div class="icard reveal" style="transition-delay:.15s">
+        <div class="inum">100%</div>
+        <div class="ilbl">Compliance Tracking</div>
+        <div class="idesc">Track crew currency status, medical certificates, and regulatory ratings with automated expiry alerts, preventing expensive grounding events.</div>
+      </div>
+      <!-- C5: Audit Readiness -->
+      <div class="icard reveal" style="transition-delay:.2s">
+        <div class="inum">−98%</div>
+        <div class="ilbl">Audit Preparation Time</div>
+        <div class="idesc">Instantly compile regulatory-compliant reports for EASA Part-145 and FAA audits in seconds, converting days of paperwork into a single, confident click.</div>
+      </div>
+      <!-- C6: Training Optimization -->
+      <div class="icard reveal" style="transition-delay:.25s">
+        <div class="inum">+92%</div>
+        <div class="ilbl">Resource Optimization</div>
+        <div class="idesc">Maximize expensive simulator capacity, minimize crew travel expenses, and optimize instructor schedules with predictive training logistics.</div>
+      </div>
     </div>
   </div>
 </section>
