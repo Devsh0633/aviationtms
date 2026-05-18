@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviation Training Management System | LMS for Airlines — SimpliTrain</title>
+<meta name="description" content="SimpliTrain is the aviation training management system for airlines, MROs, and ATOs. Schedule crew training, automate certification tracking, and pass every EASA and FAA audit. Flat-rate pricing. Live in 2 weeks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#040D1A;--bg2:#060F20;--bg3:#091428;--card:#0C1A30;--card2:#0F2040;
+  --orange:#FF6B35;--orange-d:rgba(255,107,53,0.2);
+  --purple:#7B45E8;--purple-l:#9D6FF0;--purple-d:rgba(123,69,232,0.2);
+  --cyan:#00C9FF;--cyan-d:rgba(0,201,255,0.15);
+  --emerald:#00D4A0;--emerald-d:rgba(0,212,160,0.15);
+  --gold:#FFB830;--red:#FF4557;
+  --white:#F0F8FF;--text:#C8D8F0;--muted:#5A6E8A;--dim:#1E3050;
+  --border:rgba(255,255,255,0.06);--bm:rgba(255,255,255,0.11);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15;color:var(--white)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── UTILS ─────────────────────────────────────── */
+.c{max-width:1180px;margin:0 auto;padding:0 2rem}
+.grad{background:linear-gradient(135deg,var(--cyan),var(--purple-l),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;border:1px solid}
+.tag-o{color:var(--orange);border-color:rgba(255,107,53,.3);background:rgba(255,107,53,.08)}
+.tag-p{color:var(--purple-l);border-color:rgba(123,69,232,.3);background:rgba(123,69,232,.08)}
+.tag-c{color:var(--cyan);border-color:rgba(0,201,255,.3);background:rgba(0,201,255,.08)}
+.tag-e{color:var(--emerald);border-color:rgba(0,212,160,.3);background:rgba(0,212,160,.08)}
+.slabel{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:'DM Sans',sans-serif;text-decoration:none}
+.btn-p{background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(123,69,232,.4)}
+.btn-s{background:transparent;color:var(--text);border:1px solid var(--bm)}
+.btn-s:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+.btn-o{background:var(--orange);color:#fff}
+.btn-o:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,53,.4)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on{opacity:1;transform:translateY(0)}
+
+/* ── NAV ───────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom:1px solid var(--border);background:rgba(4,13,26,.88);backdrop-filter:blur(18px)}
+.nav-i{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;color:var(--white)}
+.logo span{color:var(--cyan)}
+.nav-l{display:flex;align-items:center;gap:2rem}
+.nav-l a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-l a:hover{color:var(--white)}
+.nav-c{display:flex;align-items:center;gap:12px}
+
+/* ── HERO ──────────────────────────────────────── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 0 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 10% 20%,rgba(123,69,232,.32) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 90% 80%,rgba(255,107,53,.22) 0%,transparent 55%),radial-gradient(ellipse 40% 50% at 78% 12%,rgba(0,201,255,.2) 0%,transparent 50%),radial-gradient(ellipse 30% 40% at 50% 50%,rgba(0,212,160,.06) 0%,transparent 60%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 85% 85% at 50% 50%,black 30%,transparent 100%)}
+.hero-ct{position:relative;z-index:1;text-align:center;max-width:840px;margin:0 auto}
+.hero-ct h1{font-size:clamp(2.8rem,6vw,4.6rem);font-weight:800;margin:1.25rem 0 1.5rem;letter-spacing:-.02em}
+.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.75;max-width:620px;margin:0 auto 2.5rem}
+.hero-ctas{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-note{margin-top:1rem;font-size:13px;color:var(--muted)}
+.hero-stats{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:4rem;position:relative;z-index:1}
+.hstat{padding:1.25rem 2rem;background:rgba(12,26,48,.75);border:1px solid var(--bm);border-radius:14px;backdrop-filter:blur(10px);text-align:center;flex:1;min-width:160px;max-width:230px}
+.hstat-n{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;display:block}
+.hstat-n.blue{background:linear-gradient(135deg,var(--cyan),var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hstat-n.warm{background:linear-gradient(135deg,var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hstat-n.green{background:linear-gradient(135deg,var(--emerald),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hstat-l{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+.hstat-l strong{color:var(--text);display:block;font-size:13px}
+
+/* ── MARQUEE ───────────────────────────────────── */
+.marq{padding:2.25rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden}
+.marq-lbl{text-align:center;font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.05em;margin-bottom:1.25rem}
+.marq-t{display:flex;gap:3rem;animation:marq 28s linear infinite;white-space:nowrap}
+.marq-t:hover{animation-play-state:paused}
+.marq-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted);flex-shrink:0}
+.marq-item span{font-size:17px}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── STATS BAR ─────────────────────────────────── */
+.stats-s{padding:6rem 0;background:var(--bg2)}
+.stats-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.scard{padding:2.5rem;background:var(--card);border-radius:16px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.scard:hover{transform:translateY(-4px);border-color:var(--bm)}
+.scard-n{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;line-height:1;margin-bottom:.5rem}
+.scard.o .scard-n{color:var(--orange)}.scard.p .scard-n{color:var(--purple-l)}.scard.e .scard-n{color:var(--emerald)}
+.scard-b{font-size:15px;font-weight:600;color:var(--white);margin-bottom:4px}
+.scard-r{font-size:14px;color:var(--muted)}
+.scard::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.scard.o::before{background:linear-gradient(180deg,var(--orange),transparent)}
+.scard.p::before{background:linear-gradient(180deg,var(--purple-l),transparent)}
+.scard.e::before{background:linear-gradient(180deg,var(--emerald),transparent)}
+
+/* ── TESTIMONIALS ──────────────────────────────── */
+.testi-s{padding:7rem 0;background:var(--bg)}
+.sh{text-align:center;margin-bottom:4rem}
+.sh h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-top:.5rem}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.tc{display:flex;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:transform .3s,border-color .3s}
+.tc:hover{transform:translateY(-4px);border-color:var(--bm)}
+.tc-m{flex:1;padding:2rem}
+.av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:.75rem;flex-shrink:0}
+.tc-name{font-size:15px;font-weight:600;color:var(--white)}
+.tc-role{font-size:13px;color:var(--muted);margin-bottom:1rem}
+.tc-q{font-size:14px;font-style:italic;color:var(--text);line-height:1.75;border-left:3px solid;padding-left:1rem}
+.tc-met{width:155px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 1rem;text-align:center}
+.tc-mnum{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1;margin-bottom:6px}
+.tc-mlbl{font-size:12px;line-height:1.4;color:rgba(255,255,255,.6)}
+.tc.o .av{background:linear-gradient(135deg,#FF6B35,#FF8C5A)}.tc.o .tc-q{border-color:var(--orange)}.tc.o .tc-met{background:linear-gradient(160deg,#3A1600,#1C0C00)}.tc.o .tc-mnum{color:var(--orange)}
+.tc.p .av{background:linear-gradient(135deg,#7B45E8,#9D6FF0)}.tc.p .tc-q{border-color:var(--purple-l)}.tc.p .tc-met{background:linear-gradient(160deg,#1C0D40,#0C0620)}.tc.p .tc-mnum{color:var(--purple-l)}
+.tc.c .av{background:linear-gradient(135deg,#0088B2,#00C9FF)}.tc.c .tc-q{border-color:var(--cyan)}.tc.c .tc-met{background:linear-gradient(160deg,#00202F,#000E18)}.tc.c .tc-mnum{color:var(--cyan)}
+.tc.e .av{background:linear-gradient(135deg,#007A60,#00D4A0)}.tc.e .tc-q{border-color:var(--emerald)}.tc.e .tc-met{background:linear-gradient(160deg,#002018,#000E0C)}.tc.e .tc-mnum{color:var(--emerald)}
+
+/* ── FEATURES ──────────────────────────────────── */
+.feat-s{padding:7rem 0;background:var(--bg2)}
+.fb{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:4.5rem 0;border-bottom:1px solid var(--border)}
+.fb:last-child{border-bottom:none}
+.fb.rev .fvis{order:-1}
+.flbl{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.fico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.fh2{font-size:clamp(1.5rem,2.5vw,2.1rem);font-weight:700;margin:.75rem 0}
+.fbody{font-size:15px;color:var(--muted);line-height:1.75}
+.fvis{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden}
+.fv-hdr{display:flex;align-items:center;gap:10px;padding:1rem 1.5rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.dots{display:flex;gap:5px}
+.dot{width:8px;height:8px;border-radius:50%}
+.dr{background:#ff5f57}.dy{background:#ffbd2e}.dg{background:#28ca41}
+.ftitle{font-size:12px;color:var(--muted);font-weight:500;flex:1;text-align:center}
+.fp{padding:1.5rem}
+
+/* crew rows */
+.crow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.crow:last-child{border-bottom:none}
+.cbadge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.cname{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.ctype{font-size:11px;color:var(--muted)}
+.cst{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+.ok{background:rgba(0,212,160,.12);color:var(--emerald)}.warn{background:rgba(255,107,53,.12);color:var(--orange)}
+
+/* cert rows */
+.certrow{padding:11px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.certrow:last-child{border-bottom:none}
+.cico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.cinfo{flex:1}
+.cname2{font-size:13px;font-weight:600;color:var(--text)}
+.cdate{font-size:11px;color:var(--muted)}
+.cbdg{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;white-space:nowrap}
+.csafe{background:rgba(0,212,160,.12);color:var(--emerald)}.cwarn{background:rgba(255,107,53,.12);color:var(--orange)}.calert{background:rgba(255,69,87,.12);color:var(--red)}
+
+/* audit */
+.abarlbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px}
+.abar{height:7px;background:var(--dim);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.abarfill{height:100%;border-radius:4px}
+.ameta{font-size:12px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)}
+.ameta:last-child{border-bottom:none}
+.ameta strong{color:var(--emerald)}
+
+/* dashboard */
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.dmini{padding:.9rem;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border);text-align:center}
+.dnum{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:2px}
+.dlbl{font-size:11px;color:var(--muted)}
+.dpbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:3px}
+.dpb{height:5px;background:var(--dim);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.dpbf{height:100%;border-radius:3px}
+
+/* ── COMPARISON ────────────────────────────────── */
+.comp-s{padding:7rem 0;background:var(--bg)}
+.ctbl{width:100%;border-collapse:collapse;margin-top:2.5rem}
+.ctbl th{padding:1.25rem 1.5rem;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;text-align:left}
+.ctbl th:first-child{color:var(--muted)}.ctbl th:nth-child(2){color:var(--muted)}.ctbl th:nth-child(3){color:var(--emerald)}
+.ctbl tr:first-child{background:linear-gradient(90deg,var(--bg3),rgba(0,212,160,.06))}
+.ctbl td{padding:1rem 1.5rem;font-size:14px;color:var(--text);border-top:1px solid var(--border)}
+.ctbl td:first-child{font-weight:600;color:var(--white)}.ctbl td:nth-child(2){color:var(--muted)}.ctbl td:nth-child(3){color:var(--emerald)}
+.ctbl tr:hover{background:rgba(255,255,255,.02)}
+
+/* ── PRICING ───────────────────────────────────── */
+.price-s{padding:7rem 0;background:var(--bg2)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.pcard{padding:2.5rem;border-radius:16px;border:1px solid var(--border);position:relative;overflow:hidden}
+.pcard-bad{background:linear-gradient(135deg,rgba(255,69,87,.07),rgba(255,69,87,.02));border-color:rgba(255,69,87,.22)}
+.pcard-good{background:linear-gradient(135deg,rgba(0,212,160,.09),rgba(0,201,255,.05));border-color:rgba(0,212,160,.28)}
+.pbdg{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;margin-bottom:1rem}
+.pbdg-bad{background:rgba(255,69,87,.12);color:var(--red)}.pbdg-good{background:rgba(0,212,160,.12);color:var(--emerald)}
+.ptitle{font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px}
+.psub{font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+.pnum{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;line-height:1;margin-bottom:6px}
+.pnum-bad{color:var(--red)}.pnum-good{color:var(--emerald)}
+.pnote{font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+.pdesc{font-size:14px;line-height:1.65}
+.pdesc-bad{color:rgba(255,69,87,.85)}.pdesc-good{color:rgba(0,212,160,.9)}
+.pfeat{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:8px}
+.pfeat li{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text)}
+.pfeat li::before{content:'✓';color:var(--emerald);font-weight:700;flex-shrink:0}
+
+/* ── IMPACT ────────────────────────────────────── */
+.impact-s{padding:7rem 0;background:var(--bg);position:relative;overflow:hidden}
+.impact-s::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 20% 50%,rgba(123,69,232,.1),transparent 60%),radial-gradient(ellipse 40% 60% at 80% 50%,rgba(0,201,255,.07),transparent 60%)}
+.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1;margin-top:2.5rem}
+.icard{padding:2rem 1.5rem;text-align:center;background:var(--card);border-radius:16px;border:1px solid var(--border);transition:transform .3s,border-color .3s}
+.icard:hover{transform:translateY(-4px);border-color:var(--bm)}
+.inum{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;line-height:1;margin-bottom:.75rem}
+.ilbl{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── RATINGS ───────────────────────────────────── */
+.rate-s{padding:7rem 0;background:var(--bg2)}
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.rcard{padding:1.75rem;background:var(--card);border-radius:12px;border:1px solid var(--border);text-align:center;transition:transform .3s,border-color .3s}
+.rcard:hover{transform:translateY(-4px);border-color:var(--bm)}
+.rplt{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px}
+.rstars{color:var(--gold);font-size:13px;margin-bottom:4px}
+.rscore{font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+.rcat{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* ── FAQ ───────────────────────────────────────── */
+.faq-s{padding:7rem 0;background:var(--bg)}
+.flist{max-width:800px;margin:3rem auto 0;display:flex;flex-direction:column;gap:8px}
+.fi{background:var(--card);border-radius:12px;border:1px solid var(--border);overflow:hidden}
+.fq{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:transparent;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);text-align:left;gap:1rem;transition:background .2s}
+.fq:hover{background:rgba(255,255,255,.03)}
+.fic{width:24px;height:24px;border-radius:50%;border:1px solid var(--bm);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s,background .3s;font-size:16px;color:var(--muted)}
+.fi.op .fic{transform:rotate(45deg);background:rgba(255,107,53,.1);border-color:rgba(255,107,53,.3);color:var(--orange)}
+.fa{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:14px;color:var(--muted);line-height:1.8;padding:0 1.5rem}
+.fi.op .fa{max-height:300px;padding-bottom:1.25rem}
+
+/* ── CTA ───────────────────────────────────────── */
+.cta-s{padding:7rem 0;position:relative;overflow:hidden}
+.cta-s::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#0D0525 0%,#180A35 40%,#0A1A30 70%,#04081A 100%)}
+.cta-s::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(123,69,232,.22),transparent 60%);pointer-events:none}
+.cta-in{position:relative;z-index:1;text-align:center;max-width:680px;margin:0 auto}
+.cta-in h2{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;margin:1rem 0}
+.cta-in p{font-size:15px;color:var(--muted);margin-bottom:2.5rem}
+.cta-bts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.cta-fine{font-size:13px;color:var(--muted)}
+
+/* ── FOOTER ────────────────────────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2rem}
+.fi-row{display:flex;justify-content:space-between;align-items:flex-start;gap:3rem;flex-wrap:wrap}
+.fbrand p{font-size:13px;color:var(--muted);margin-top:6px;max-width:240px}
+.fcol h4{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+.fcol a{display:block;font-size:14px;color:var(--muted);margin-bottom:6px;transition:color .2s}
+.fcol a:hover{color:var(--text)}
+.fb2{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap;gap:1rem}
+.fb2 a{color:var(--muted);transition:color .2s}.fb2 a:hover{color:var(--text)}
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media(max-width:960px){
+  .stats-g,.tgrid,.pgrid{grid-template-columns:1fr}
+  .fb{grid-template-columns:1fr}.fb.rev .fvis{order:0}
+  .igrid{grid-template-columns:repeat(2,1fr)}.rgrid{grid-template-columns:repeat(2,1fr)}
+  .nav-l{display:none}.fi-row{flex-direction:column}
+}
+@media(max-width:580px){
+  .igrid,.rgrid{grid-template-columns:1fr}
+  .ctbl{font-size:12px}.ctbl th,.ctbl td{padding:.65rem .75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav>
+  <div class="c nav-i">
+    <div class="logo">Simpli<span>Train</span></div>
+    <div class="nav-l">
+      <a href="#features">Features</a>
+      <a href="#compare">Compare</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-c">
+      <a href="#" class="btn btn-s" style="padding:10px 20px;font-size:14px">Sign In</a>
+      <a href="#cta" class="btn btn-p" style="padding:10px 20px;font-size:14px">Book a Free Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="c">
+    <div class="hero-ct reveal">
+      <span class="tag tag-c">For Airlines, MROs &amp; Aviation Operators Managing Training In-House</span>
+      <h1>Run Your Aviation<br><span class="grad">Training Operation.</span><br>Not Your Spreadsheets.</h1>
+      <p class="hero-sub">SimpliTrain gives airlines and aviation operators one platform to schedule crew training, track every certification, and walk into any EASA or FAA audit fully prepared — without the admin overhead.</p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn btn-p">Book a Free Demo →</a>
+        <a href="#features" class="btn btn-s">Start Free Trial</a>
+      </div>
+      <p class="hero-note">Flat-rate pricing · No per-crew fees · Live in 2 weeks</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat reveal" style="transition-delay:.1s"><span class="hstat-n blue">−85%</span><div class="hstat-l"><strong>Less training admin time</strong>More time keeping crew in the air</div></div>
+      <div class="hstat reveal" style="transition-delay:.2s"><span class="hstat-n warm">0%</span><div class="hstat-l"><strong>Platform cost increase</strong>as your crew headcount grows</div></div>
+      <div class="hstat reveal" style="transition-delay:.3s"><span class="hstat-n green">2 wks</span><div class="hstat-l"><strong>To go live</strong>Not three months</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ MARQUEE ═══════════════════ -->
+<div class="marq">
+  <div class="marq-lbl">Trusted by aviation training departments in</div>
+  <div style="overflow:hidden">
+    <div class="marq-t">
+      <span class="marq-item"><span>✈</span>Commercial Airlines</span>
+      <span class="marq-item"><span>🔧</span>MRO Organisations</span>
+      <span class="marq-item"><span>🎓</span>ATOs &amp; Flight Academies</span>
+      <span class="marq-item"><span>🚁</span>Helicopter Operators</span>
+      <span class="marq-item"><span>🛬</span>Ground Handling Ops</span>
+      <span class="marq-item"><span>🏭</span>Part-145 Maintenance</span>
+      <span class="marq-item"><span>✈</span>Commercial Airlines</span>
+      <span class="marq-item"><span>🔧</span>MRO Organisations</span>
+      <span class="marq-item"><span>🎓</span>ATOs &amp; Flight Academies</span>
+      <span class="marq-item"><span>🚁</span>Helicopter Operators</span>
+      <span class="marq-item"><span>🛬</span>Ground Handling Ops</span>
+      <span class="marq-item"><span>🏭</span>Part-145 Maintenance</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ STATS ═══════════════════ -->
+<section class="stats-s">
+  <div class="c">
+    <div class="stats-g">
+      <div class="scard o reveal"><div class="scard-n">−85%</div><div class="scard-b">Less training admin time</div><div class="scard-r">More time keeping crew in the air and operations running smoothly</div></div>
+      <div class="scard p reveal" style="transition-delay:.12s"><div class="scard-n">100%</div><div class="scard-b">Audit pass rate maintained</div><div class="scard-r">By aviation operator clients across EASA and FAA inspections</div></div>
+      <div class="scard e reveal" style="transition-delay:.24s"><div class="scard-n">2 wks</div><div class="scard-b">Average time to go live</div><div class="scard-r">No developer needed. First crew training assigned within 48 hours</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+<section class="testi-s" id="testimonials">
+  <div class="c">
+    <div class="sh reveal">
+      <div class="slabel">Real Results from Real Aviation Operations</div>
+      <h2>What happens when the<br><span class="grad">platform fits the operation.</span></h2>
+    </div>
+    <div class="tgrid">
+
+      <div class="tc o reveal">
+        <div class="tc-m">
+          <div class="av">TH</div>
+          <div class="tc-name">Tom Hargreaves</div>
+          <div class="tc-role">Training &amp; Compliance Manager · Aviation Safety Training Centre</div>
+          <p class="tc-q">"In aviation, a missed certification record means a grounded aircraft. SimpliTrain's automated expiry tracking and one-click audit reports mean we walk into every EASA inspection completely prepared, every time."</p>
+        </div>
+        <div class="tc-met"><div class="tc-mnum">100%</div><div class="tc-mlbl">Regulatory audit pass rate maintained</div></div>
+      </div>
+
+      <div class="tc p reveal" style="transition-delay:.1s">
+        <div class="tc-m">
+          <div class="av">SR</div>
+          <div class="tc-name">Sandra Reyes</div>
+          <div class="tc-role">Head of Crew Training · Regional Airline, Latin America</div>
+          <p class="tc-q">"We had pilots whose type ratings were expiring and nobody caught it until the roster was built. With SimpliTrain, the system flags every expiry 90 days out. Scheduling conflicts are gone. Last-minute scrambles are gone."</p>
+        </div>
+        <div class="tc-met"><div class="tc-mnum">−90%</div><div class="tc-mlbl">Last-minute training reschedules</div></div>
+      </div>
+
+      <div class="tc c reveal" style="transition-delay:.15s">
+        <div class="tc-m">
+          <div class="av">MK</div>
+          <div class="tc-name">Mohammed Al-Khatib</div>
+          <div class="tc-role">Director of Training · MRO Organisation, Middle East</div>
+          <p class="tc-q">"Audit preparation used to take our team three days, pulling paper records, cross-referencing spreadsheets. SimpliTrain generates a complete maintenance training compliance report in under a minute. We stopped dreading audits."</p>
+        </div>
+        <div class="tc-met"><div class="tc-mnum" style="font-size:1.5rem">3d→60s</div><div class="tc-mlbl">Audit report generation time</div></div>
+      </div>
+
+      <div class="tc e reveal" style="transition-delay:.2s">
+        <div class="tc-m">
+          <div class="av">LP</div>
+          <div class="tc-name">Lena Petrov</div>
+          <div class="tc-role">VP Training Operations · Charter Airline Group, Europe</div>
+          <p class="tc-q">"We manage training across four bases, two fleets, and 800 crew. Before SimpliTrain, each base ran its own system. Now I see every crew member's currency status, every simulator slot, and every upcoming renewal in one place."</p>
+        </div>
+        <div class="tc-met"><div class="tc-mnum">4</div><div class="tc-mlbl">Bases managed from one dashboard</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURES ═══════════════════ -->
+<section class="feat-s" id="features">
+  <div class="c">
+
+    <!-- F1: Scheduler -->
+    <div class="fb reveal">
+      <div class="feat-text">
+        <div class="flbl"><div class="fico" style="background:rgba(123,69,232,.12)">🗓</div><span class="tag tag-p">No More Spreadsheets</span></div>
+        <h2 class="fh2">Schedule Every Crew.<br>Every Base. In One Place.</h2>
+        <p class="fbody">One intelligent scheduler for pilots, cabin crew, MRO engineers, and ground ops — across every base and fleet type. Training conflicts flagged before they reach operations.</p>
+      </div>
+      <div class="fvis">
+        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Crew Training Scheduler</div></div>
+        <div class="fp">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><span style="font-size:12px;color:var(--muted)">This Week · All Bases</span><span class="cst ok">✓ No conflicts</span></div>
+          <div class="crow">
+            <div class="cbadge" style="background:linear-gradient(135deg,#7B45E8,#9D6FF0)">JP</div>
+            <div style="flex:1"><div class="cname">James Park <span style="color:var(--muted);font-weight:400;font-size:12px">(A320 Captain)</span></div><div class="ctype">Type Rating Renewal · LHR · Mon 09:00</div></div>
+            <span class="cst ok">Scheduled</span>
+          </div>
+          <div class="crow">
+            <div class="cbadge" style="background:linear-gradient(135deg,#FF6B35,#FF8C5A)">MR</div>
+            <div style="flex:1"><div class="cname">Maria Rodriguez <span style="color:var(--muted);font-weight:400;font-size:12px">(Cabin Crew)</span></div><div class="ctype">Safety Refresher · MAD · Tue 14:00</div></div>
+            <span class="cst warn">Expiring 28d</span>
+          </div>
+          <div class="crow">
+            <div class="cbadge" style="background:linear-gradient(135deg,#00D4A0,#00C9FF)">AK</div>
+            <div style="flex:1"><div class="cname">Ahmed Khalid <span style="color:var(--muted);font-weight:400;font-size:12px">(MRO Engineer)</span></div><div class="ctype">Part-66 Module · DXB · Wed 09:00</div></div>
+            <span class="cst ok">Confirmed</span>
+          </div>
+          <div class="crow">
+            <div class="cbadge" style="background:linear-gradient(135deg,#FFB830,#FF6B35)">SK</div>
+            <div style="flex:1"><div class="cname">Sophie Koch <span style="color:var(--muted);font-weight:400;font-size:12px">(B737 F/O)</span></div><div class="ctype">CRM Refresher · FRA · Thu 10:00</div></div>
+            <span class="cst ok">Scheduled</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F2: Certs -->
+    <div class="fb rev reveal">
+      <div class="feat-text">
+        <div class="flbl"><div class="fico" style="background:rgba(255,107,53,.12)">🔔</div><span class="tag tag-o">Zero Missed Renewals</span></div>
+        <h2 class="fh2">Certifications That<br>Never Slip Through.</h2>
+        <p class="fbody">Automated alerts at 90, 60, and 30 days before every type rating, recurrent check, and safety certification expires. No crew grounded. No last-minute panic.</p>
+      </div>
+      <div class="fvis">
+        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Certification Tracker · 847 records</div></div>
+        <div class="fp">
+          <div class="certrow">
+            <div class="cico" style="background:rgba(255,69,87,.1)">⚠</div>
+            <div class="cinfo"><div class="cname2">A320 Type Rating — Capt. J. Park</div><div class="cdate">Expires 15 Jun 2025 · Alerts sent at 90, 60 &amp; 30 days</div></div>
+            <span class="cbdg calert">12 days</span>
+          </div>
+          <div class="certrow">
+            <div class="cico" style="background:rgba(255,107,53,.1)">🔔</div>
+            <div class="cinfo"><div class="cname2">Dangerous Goods — M. Rodriguez</div><div class="cdate">Expires 03 Jul 2025 · Next reminder in 2 days</div></div>
+            <span class="cbdg cwarn">30 days</span>
+          </div>
+          <div class="certrow">
+            <div class="cico" style="background:rgba(0,212,160,.1)">✅</div>
+            <div class="cinfo"><div class="cname2">Line Check — S. Koch</div><div class="cdate">Renewed Jan 2025 · Valid until Jan 2026</div></div>
+            <span class="cbdg csafe">Current</span>
+          </div>
+          <div class="certrow">
+            <div class="cico" style="background:rgba(0,212,160,.1)">✅</div>
+            <div class="cinfo"><div class="cname2">Emergency Procedures — A. Khalid</div><div class="cdate">Renewed Mar 2025 · Valid until Mar 2026</div></div>
+            <span class="cbdg csafe">Current</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F3: Audit -->
+    <div class="fb reveal">
+      <div class="feat-text">
+        <div class="flbl"><div class="fico" style="background:rgba(0,201,255,.12)">📋</div><span class="tag tag-c">Audit Confidence</span></div>
+        <h2 class="fh2">Walk Into Every Inspection<br>Fully Prepared.</h2>
+        <p class="fbody">One-click audit reports formatted for EASA, FAA, ICAO, and IATA inspectors, generated in under 60 seconds. What used to take two days now takes one click.</p>
+      </div>
+      <div class="fvis">
+        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">EASA Compliance Report</div></div>
+        <div class="fp">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+            <div><div style="font-size:14px;font-weight:600;color:var(--white)">Q2 2025 Audit Pack</div><div style="font-size:12px;color:var(--muted)">Generated in 0:48 sec · 847 crew records</div></div>
+            <span class="cst ok">✓ Export Ready</span>
+          </div>
+          <div class="abarlbl"><span>Pilot Certifications</span><span style="color:var(--emerald)">100%</span></div>
+          <div class="abar"><div class="abarfill" style="width:100%;background:var(--emerald)"></div></div>
+          <div class="abarlbl"><span>Cabin Crew Records</span><span style="color:var(--emerald)">100%</span></div>
+          <div class="abar"><div class="abarfill" style="width:100%;background:var(--emerald)"></div></div>
+          <div class="abarlbl"><span>MRO Part-66 Training</span><span style="color:var(--cyan)">98%</span></div>
+          <div class="abar"><div class="abarfill" style="width:98%;background:var(--cyan)"></div></div>
+          <div class="ameta">Regulatory Authority: <strong>EASA Part-145</strong></div>
+          <div class="ameta">Inspection Date: <strong>18 Jun 2025</strong></div>
+          <div class="ameta">Scope: <strong>847 crew · 4 bases · 2 fleets</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F4: Dashboard -->
+    <div class="fb rev reveal">
+      <div class="feat-text">
+        <div class="flbl"><div class="fico" style="background:rgba(0,212,160,.12)">📊</div><span class="tag tag-e">Full Crew Visibility</span></div>
+        <h2 class="fh2">See Every Gap Before It<br>Grounds a Flight.</h2>
+        <p class="fbody">Real-time currency status for every crew member, every role, every base — in one dashboard. Spot gaps days or weeks before they become operational problems.</p>
+      </div>
+      <div class="fvis">
+        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Operations Dashboard · Live</div></div>
+        <div class="fp">
+          <div class="dgrid">
+            <div class="dmini"><div class="dnum" style="color:var(--emerald)">847</div><div class="dlbl">Crew current</div></div>
+            <div class="dmini"><div class="dnum" style="color:var(--orange)">12</div><div class="dlbl">Expiring &lt;30d</div></div>
+            <div class="dmini"><div class="dnum" style="color:var(--cyan)">4</div><div class="dlbl">Bases live</div></div>
+            <div class="dmini"><div class="dnum" style="color:var(--purple-l)">2</div><div class="dlbl">Fleet types</div></div>
+          </div>
+          <div class="dpbl"><span>LHR — Pilot currency</span><span style="color:var(--emerald)">98%</span></div>
+          <div class="dpb"><div class="dpbf" style="width:98%;background:var(--emerald)"></div></div>
+          <div class="dpbl"><span>MAD — Cabin crew records</span><span style="color:var(--emerald)">100%</span></div>
+          <div class="dpb"><div class="dpbf" style="width:100%;background:var(--emerald)"></div></div>
+          <div class="dpbl"><span>DXB — MRO Part-66 coverage</span><span style="color:var(--orange)">91%</span></div>
+          <div class="dpb"><div class="dpbf" style="width:91%;background:var(--orange)"></div></div>
+          <div class="dpbl"><span>FRA — Ground ops safety</span><span style="color:var(--cyan)">95%</span></div>
+          <div class="dpb"><div class="dpbf" style="width:95%;background:var(--cyan)"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ COMPARISON ═══════════════════ -->
+<section class="comp-s" id="compare">
+  <div class="c">
+    <div class="sh reveal">
+      <div class="slabel">See the Difference</div>
+      <h2>Most Systems Store Training Records.<br><span class="grad">SimpliTrain Manages Your Operation.</span></h2>
+    </div>
+    <table class="ctbl reveal">
+      <thead>
+        <tr>
+          <th>What You Need</th>
+          <th>Legacy System or Spreadsheets</th>
+          <th>✓&nbsp; SimpliTrain</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Crew certification tracking</td><td>Manual — spreadsheets, missed renewals</td><td>Automated tracking with expiry alerts for every crew member</td></tr>
+        <tr><td>Recurrent training scheduling</td><td>Conflicts, gaps, last-minute scrambles</td><td>Intelligent ILT + vILT scheduler across all bases and fleets</td></tr>
+        <tr><td>Audit reporting</td><td>Days of manual record-pulling</td><td>One click. Complete records. 60 seconds.</td></tr>
+        <tr><td>Simulator &amp; resource planning</td><td>Booked separately, no utilisation view</td><td>Resource and capacity planning built in</td></tr>
+        <tr><td>Multi-base / multi-fleet view</td><td>Multiple systems or spreadsheet tabs</td><td>One dashboard for every base, fleet, and crew type</td></tr>
+        <tr><td>Offline training delivery</td><td>Internet required everywhere</td><td>Works on aircraft, in hangars, anywhere crew operate</td></tr>
+        <tr><td>Role-specific training paths</td><td>One course list for all roles</td><td>Separate tracks: pilots, cabin crew, MRO, ground ops</td></tr>
+        <tr><td>Training cost visibility</td><td>No budget or cost-per-head tracking</td><td>Budget management, cost-per-crew, program ROI in one view</td></tr>
+        <tr><td>Implementation</td><td>Months of setup, IT-heavy deployment</td><td>Live in under 2 weeks, no developer needed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════ PRICING ═══════════════════ -->
+<section class="price-s" id="pricing">
+  <div class="c">
+    <div class="sh reveal">
+      <div class="slabel">The Pricing Model That Changes Everything</div>
+      <h2>Your Crew Grows.<br><span class="grad">Your Bill Doesn't.</span></h2>
+      <p style="color:var(--muted);font-size:15px;max-width:540px;margin:1rem auto 0;line-height:1.7">Every other aviation TMS charges per crew member — so every pilot you hire costs you more. SimpliTrain is flat-rate per admin. Scale freely.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pcard pcard-bad reveal">
+        <span class="pbdg pbdg-bad">Per-Learner / Per-Crew TMS</span>
+        <div class="ptitle">Charged per crew member / year</div>
+        <div class="psub">Scales with headcount — growth penalises you</div>
+        <div class="pnum pnum-bad">$40,000</div>
+        <div class="pnote">at $8 per crew / year (5,000 crew)</div>
+        <p class="pdesc pdesc-bad">Hire 200 new crew this year? Your platform bill goes up. Every pilot you add costs you more. Growth penalises you.</p>
+      </div>
+      <div class="pcard pcard-good reveal" style="transition-delay:.12s">
+        <span class="pbdg pbdg-good">SimpliTrain Flat-Rate</span>
+        <div class="ptitle">Flat per admin. Unlimited crew.</div>
+        <div class="psub">Scale freely — platform cost stays fixed</div>
+        <div class="pnum pnum-good">$2,160</div>
+        <div class="pnote">flat rate — regardless of crew count</div>
+        <p class="pdesc pdesc-good">Scale from 500 to 50,000 crew. Your platform cost stays exactly the same.</p>
+        <ul class="pfeat">
+          <li>Unlimited crew on every plan</li>
+          <li>No per-seat overage fees</li>
+          <li>Price fixed to admin seats only</li>
+          <li>Full ROI typically within 6 months</li>
+          <li>Plans from $60 per admin / month</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;margin-top:2.5rem;flex-wrap:wrap">
+      <a href="#" class="btn btn-p">See SimpliTrain Pricing →</a>
+      <a href="#cta" class="btn btn-s">Book a demo for a custom rate</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ IMPACT ═══════════════════ -->
+<section class="impact-s">
+  <div class="c">
+    <div class="sh reveal" style="position:relative;z-index:1">
+      <div class="slabel">The Impact</div>
+      <h2>What changes when<br><span class="grad">everything is connected.</span></h2>
+      <p style="color:var(--muted);font-size:15px;max-width:500px;margin:1rem auto 0">Outcomes reported by aviation operators who moved from disconnected tools to one platform.</p>
+    </div>
+    <div class="igrid">
+      <div class="icard reveal"><div class="inum" style="color:var(--orange)">−85%</div><div class="ilbl">Training admin time — scheduling, tracking, and reporting</div></div>
+      <div class="icard reveal" style="transition-delay:.1s"><div class="inum" style="color:var(--purple-l)">100%</div><div class="ilbl">Audit pass rate maintained by aviation operator clients</div></div>
+      <div class="icard reveal" style="transition-delay:.2s"><div class="inum" style="color:var(--cyan)">−98%</div><div class="ilbl">Time to generate a full compliance report</div></div>
+      <div class="icard reveal" style="transition-delay:.3s"><div class="inum" style="color:var(--emerald)">25%</div><div class="ilbl">Reduction in platform and admin overhead in year one</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ RATINGS ═══════════════════ -->
+<section class="rate-s">
+  <div class="c">
+    <div class="sh reveal">
+      <div class="slabel">Independently Validated</div>
+      <h2>Built for Aviation Operators.<br><span class="grad">Recognised for Delivering.</span></h2>
+    </div>
+    <div class="rgrid">
+      <div class="rcard reveal"><div class="rplt">G2</div><div class="rstars">★★★★½</div><div class="rscore">4.5</div><div class="rcat">Training Management Software<br><span style="font-size:11px;color:var(--dim)">Verified user reviews</span></div></div>
+      <div class="rcard reveal" style="transition-delay:.08s"><div class="rplt">Capterra</div><div class="rstars">★★★★½</div><div class="rscore">4.5</div><div class="rcat">Learning Management System<br><span style="font-size:11px;color:var(--dim)">Verified user reviews</span></div></div>
+      <div class="rcard reveal" style="transition-delay:.16s"><div class="rplt">MarketsandMarkets™</div><div class="rstars" style="color:var(--purple-l)">■■■■■</div><div class="rscore" style="color:var(--purple-l);font-size:1rem">2025 Matrix</div><div class="rcat">LMS Market Matrix<br><span style="font-size:11px;color:var(--dim)">Featured company evaluation</span></div></div>
+      <div class="rcard reveal" style="transition-delay:.24s"><div class="rplt">Software Advice</div><div class="rstars">★★★★½</div><div class="rscore">4.5</div><div class="rcat">LMS Software Category<br><span style="font-size:11px;color:var(--dim)">Verified user reviews</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section class="faq-s" id="faq">
+  <div class="c">
+    <div class="sh reveal">
+      <div class="slabel">Frequently Asked Questions</div>
+      <h2>Questions About SimpliTrain<br><span class="grad">and LMS for Aviation</span></h2>
+    </div>
+    <div class="flist">
+
+      <div class="fi"><button class="fq">What is an aviation training management system (TMS)?<span class="fic">+</span></button><div class="fa">An aviation TMS is the operational backbone of an in-house training department. It manages recurrent training schedules, tracks every crew certification and expiry date, coordinates instructors and simulator slots, and produces audit-ready records for EASA, FAA, ICAO, and IATA inspectors. SimpliTrain combines LMS, TMS, and LXP in a single platform — so you manage eLearning delivery, instructor-led scheduling, and compliance tracking without switching systems.</div></div>
+
+      <div class="fi"><button class="fq">How does SimpliTrain handle recurrent training for pilots and cabin crew?<span class="fic">+</span></button><div class="fa">SimpliTrain tracks every recurrence cycle — type rating renewals, operator proficiency checks, line checks, annual emergency procedures, CRM refreshers, and dangerous goods training. Automated alerts fire at 90, 60, and 30 days before any expiry. The built-in scheduler plans recurrent sessions across bases and fleets without conflicts, and records sync automatically when crew complete training — online or offline.</div></div>
+
+      <div class="fi"><button class="fq">Can SimpliTrain manage training across multiple bases and fleet types?<span class="fic">+</span></button><div class="fa">Yes. SimpliTrain is designed for multi-base, multi-fleet operations. Training managers at headquarters see full crew currency status across every location from one dashboard. Fleet-specific training tracks — A320 versus B737 type ratings — are managed separately and assigned automatically based on crew qualification and base. No separate logins or disconnected systems required.</div></div>
+
+      <div class="fi"><button class="fq">How does audit reporting work for EASA, FAA, or IATA inspections?<span class="fic">+</span></button><div class="fa">SimpliTrain generates complete compliance audit reports in under 60 seconds — filterable by crew member, role, aircraft type, base, or date range. Reports are formatted for direct submission to your Competent Authority. Your team no longer spends days pulling records manually before an inspection. The audit trail is live, accurate, and exportable at any time.</div></div>
+
+      <div class="fi"><button class="fq">Does SimpliTrain support EASA Part-147 and Part-66 requirements for maintenance training?<span class="fic">+</span></button><div class="fa">Yes. SimpliTrain supports delivery and tracking of EASA Part-147 Basic Training, Type Training, and OJT completion. It covers the 2024–2025 regulatory updates — including formally recognised Distance Learning (async CBT) and Virtually Controlled Environments (synchronous vILT), updated SMS content requirements for Modules 9 and 10, and the new MCQ assessment formats.</div></div>
+
+      <div class="fi"><button class="fq">How does SimpliTrain help with resource planning for simulators and instructors?<span class="fic">+</span></button><div class="fa">SimpliTrain's built-in scheduler handles simulator slot allocation, instructor assignment, and classroom capacity planning alongside crew training schedules. You see utilisation gaps and conflicts before they reach operations — reducing wasted simulator time and last-minute rebooking costs.</div></div>
+
+      <div class="fi"><button class="fq">Can crew complete training offline — on aircraft or in remote maintenance locations?<span class="fic">+</span></button><div class="fa">Yes. Crew can complete assigned eLearning modules without an internet connection — on long-haul flights, in remote hangars, or at off-grid maintenance sites. Completion records, assessment scores, and progress data sync automatically when the device reconnects. No training record is ever lost.</div></div>
+
+      <div class="fi"><button class="fq">What content standards does SimpliTrain support?<span class="fic">+</span></button><div class="fa">SimpliTrain supports SCORM 1.2, xAPI (Tin Can API), and cmi5 — the full range of aviation eLearning authoring outputs. Upload content from Articulate, Adobe Captivate, or any compliant authoring tool. SimpliTrain also includes a built-in AI course builder to convert SOPs, safety bulletins, and airworthiness directives into SCORM-ready modules without external software.</div></div>
+
+      <div class="fi"><button class="fq">How is SimpliTrain priced for aviation operators?<span class="fic">+</span></button><div class="fa">SimpliTrain uses flat-rate per-admin pricing. You pay based on how many administrators manage the platform — not how many crew members use it. A fleet that grows from 500 to 5,000 crew members pays the same platform fee. Plans start from $60 per admin per month. Free trial available, no credit card required.</div></div>
+
+      <div class="fi"><button class="fq">How long does implementation take?<span class="fic">+</span></button><div class="fa">Most aviation operators are fully live in under two weeks. Existing training records, crew data, and course content can be migrated during onboarding with no IT team required. SimpliTrain's onboarding specialists handle configuration and setup, and your first crew training can be assigned within 48 hours of go-live.</div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-s" id="cta">
+  <div class="c">
+    <div class="cta-in reveal">
+      <span class="tag tag-o">Get Started Today</span>
+      <h2>Your crew training operation deserves a platform built for it.</h2>
+      <p>Book a free 15-minute demo. We configure it live for your airline's training workflow. No pitch. No pressure.</p>
+      <div class="cta-bts">
+        <a href="#" class="btn btn-o">Book My Free Demo →</a>
+        <a href="#" class="btn btn-s">Get the Free Buyer's Guide</a>
+      </div>
+      <div class="cta-fine">Free trial available. No credit card required.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="c">
+    <div class="fi-row">
+      <div class="fbrand">
+        <div class="logo">Simpli<span>Train</span></div>
+        <p>The unified LMS + TMS + LXP platform built for aviation operators managing crew training in-house.</p>
+      </div>
+      <div class="fcol">
+        <h4>Product</h4>
+        <a href="#">Training Scheduler</a>
+        <a href="#">Certificate Management</a>
+        <a href="#">Audit Reporting</a>
+        <a href="#">AI Course Builder</a>
+        <a href="#">Offline Delivery</a>
+      </div>
+      <div class="fcol">
+        <h4>Industries</h4>
+        <a href="#">Commercial Airlines</a>
+        <a href="#">MRO Organisations</a>
+        <a href="#">ATOs &amp; Flight Academies</a>
+        <a href="#">Helicopter Operators</a>
+        <a href="#">Part-145 Maintenance</a>
+      </div>
+      <div class="fcol">
+        <h4>Company</h4>
+        <a href="#">About SimpliTrain</a>
+        <a href="#">Pricing</a>
+        <a href="#">Customer Stories</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="fb2">
+      <span>© 2025 SimpliTrain / MundriSoft Solutions. All rights reserved.</span>
+      <div style="display:flex;gap:1.5rem"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.fq').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const open=item.classList.contains('op');
+    document.querySelectorAll('.fi').forEach(i=>i.classList.remove('op'));
+    if(!open)item.classList.add('op');
+  });
+});
+</script>
+</body>
+</html>
