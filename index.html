@@ -70,35 +70,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
 .hero-note{margin-top:1rem;font-size:13px;color:rgba(255,255,255,0.4)}
 
 .hero-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center;position:relative;z-index:2}
-.av-visual{position:relative;width:100%;max-width:580px;margin:0 auto;perspective:1200px}
-.efb-tablet{background:#0C1A30;border-radius:24px;border:10px solid #1E293B;box-shadow:0 35px 70px -15px rgba(0,0,0,0.8), 0 0 40px rgba(0,199,255,0.08);overflow:hidden;transform:rotateY(14deg) rotateX(4deg) rotateZ(-3deg);transition:transform 0.4s ease}
-.efb-tablet:hover{transform:rotateY(4deg) rotateX(2deg) rotateZ(-1deg) scale(1.02)}
+.av-visual{position:relative;width:100%;max-width:640px;margin:0 auto;perspective:1500px}
+.efb-tablet{background:#0C1A30;border-radius:24px;border:10px solid #1E293B;box-shadow:0 35px 70px -15px rgba(0,0,0,0.8), 0 0 55px rgba(0,199,255,0.06);overflow:hidden;transform:rotateY(12deg) rotateX(6deg) rotateZ(-2deg);transition:transform 0.4s ease;width:100%}
+.efb-tablet:hover{transform:rotateY(4deg) rotateX(2deg) rotateZ(-0.5deg) scale(1.025)}
 .efb-hdr{background:#0F2040;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08)}
-.efb-logo{font-size:12px;font-weight:700;color:#00C9FF;letter-spacing:0.05em;text-transform:uppercase}
-.efb-time{font-size:11px;color:rgba(255,255,255,0.6)}
-.efb-badge{font-size:10px;font-weight:700;background:rgba(0,212,160,0.15);color:#00D4A0;padding:3px 8px;border-radius:100px}
-.efb-body{padding:20px;display:flex;flex-direction:column;gap:12px;background:#0A1428}
-.efb-card{display:flex;align-items:center;gap:12px;background:#0C1A30;border:1px solid rgba(255,255,255,0.06);padding:14px;border-radius:14px;transition:transform 0.2s}
+.efb-logo{font-size:11px;font-weight:700;color:#00C9FF;letter-spacing:0.08em;text-transform:uppercase}
+.efb-time{font-size:11px;color:rgba(255,255,255,0.6);font-weight:500}
+.efb-badge{font-size:9.5px;font-weight:700;background:rgba(0,212,160,0.15);color:#00D4A0;padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:0.04em}
+.efb-body{padding:20px;display:grid;grid-template-columns:1.1fr 1.3fr;gap:20px;background:#060C1A;min-height:280px}
+.efb-col-left, .efb-col-right{display:flex;flex-direction:column;gap:12px}
+.efb-widget-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em}
+
+/* SVG Compliance Ring */
+.efb-compliance-box{background:#0C1424;border-radius:14px;border:1px solid rgba(255,255,255,0.06);padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;height:100%}
+.compliance-ring{width:90px;height:90px}
+.circular-chart {display: block;margin: 0 auto;max-width: 100%;max-height: 100%}
+.circle-bg {fill: none;stroke: rgba(255,255,255,0.08);stroke-width: 2.8}
+.circle {fill: none;stroke: #00D4A0;stroke-width: 2.8;stroke-linecap: round}
+.percentage {fill: #fff;font-family: 'Poppins', sans-serif;font-size: 8.5px;font-weight: 800;text-anchor: middle}
+
+.compliance-details{width:100%;display:flex;flex-direction:column;gap:6px}
+.comp-stat{display:flex;justify-content:space-between;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.04);padding-bottom:4px}
+.comp-stat:last-child{border-bottom:none;padding-bottom:0}
+.comp-lbl{color:rgba(255,255,255,0.5)}
+.comp-val{color:#fff;font-weight:600}
+
+.efb-card{display:flex;align-items:center;gap:10px;background:#0C1424;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:12px;transition:transform 0.2s}
 .efb-card:hover{transform:translateX(4px);border-color:rgba(255,255,255,0.12)}
-.efb-avatar{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FFF}
 .efb-info{flex:1}
-.efb-name{font-size:13px;font-weight:600;color:#FFF;margin-bottom:2px}
-.efb-meta{font-size:11px;color:rgba(255,255,255,0.5)}
-.efb-status{font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px}
+.efb-name{font-size:12px;font-weight:600;color:#FFF;margin-bottom:2px}
+.efb-meta{font-size:10px;color:rgba(255,255,255,0.45)}
+.efb-status{font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;text-align:center;white-space:nowrap}
 .efb-status.ok{background:rgba(0,212,160,0.12);color:#00D4A0}
 .efb-status.warn{background:rgba(255,107,53,0.12);color:#FF6B35}
-.efb-schedule{background:#0F2040;border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.06)}
-.efb-sched-hdr{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:12px}
-.efb-sched-hdr .view-all{color:#FF6B35;font-size:10px;text-transform:uppercase;letter-spacing:0.05em}
-.sched-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.sched-row:last-child{border-bottom:none;padding-bottom:0}
-.sched-time{font-size:11px;font-weight:700;color:#00C9FF}
-.sched-detail{flex:1;display:flex;flex-direction:column}
-.sched-crew{font-size:12px;font-weight:600;color:#FFF}
-.sched-type{font-size:10px;color:rgba(255,255,255,0.5)}
-.sched-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px}
-.sched-badge.sim{background:rgba(123,69,232,0.2);color:#9D6FF0}
-.sched-badge.classroom{background:rgba(255,184,48,0.2);color:#FFB830}
 
 nav .btn-s{color:#ffffff !important;border:1px solid rgba(255,255,255,0.2) !important}
 nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(255,255,255,.3) !important}
@@ -354,47 +358,48 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
         <div class="av-visual">
           <div class="efb-tablet">
             <div class="efb-hdr">
-              <div class="efb-logo">✈ SimpliTrain EFB</div>
+              <div class="efb-logo">✈ SimpliTrain Flight Deck EFB</div>
               <div class="efb-time">10:42 UTC</div>
-              <div class="efb-badge">Active Roster</div>
+              <div class="efb-badge">Compliance readiness: ok</div>
             </div>
             <div class="efb-body">
-              <div class="efb-card">
-                <div class="efb-avatar" style="background:rgba(0,199,255,0.15);color:#00C9FF">CAPT</div>
-                <div class="efb-info">
-                  <div class="efb-name">Capt. Robert Vance</div>
-                  <div class="efb-meta">B777-300ER · Senior Captain</div>
-                </div>
-                <div class="efb-status ok">✓ SIM EXAM PASSED</div>
-              </div>
-              <div class="efb-card">
-                <div class="efb-avatar" style="background:rgba(123,69,232,0.15);color:#9D6FF0">F/O</div>
-                <div class="efb-info">
-                  <div class="efb-name">First Officer Sarah Lin</div>
-                  <div class="efb-meta">A350-900 · Co-Pilot</div>
-                </div>
-                <div class="efb-status warn">⚠ EXPIRING IN 14d</div>
-              </div>
-              <div class="efb-schedule">
-                <div class="efb-sched-hdr">
-                  <span>Upcoming Sim Training Slots</span>
-                  <span class="view-all">Live Feed</span>
-                </div>
-                <div class="sched-row">
-                  <div class="sched-time">14:00</div>
-                  <div class="sched-detail">
-                    <span class="sched-crew">Vance / Lin</span>
-                    <span class="sched-type">B777 Full-Flight Simulator (FFS)</span>
+              <!-- Left Column: Compliance Stats Visual Ring -->
+              <div class="efb-col-left">
+                <div class="efb-widget-title">Fleet Compliance</div>
+                <div class="efb-compliance-box">
+                  <div class="compliance-ring">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path class="circle" stroke-dasharray="98, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <text x="18" y="20.35" class="percentage">98.4%</text>
+                    </svg>
                   </div>
-                  <div class="sched-badge sim">Sim Room 4</div>
-                </div>
-                <div class="sched-row">
-                  <div class="sched-time">16:30</div>
-                  <div class="sched-detail">
-                    <span class="sched-crew">Crew Refresher Course</span>
-                    <span class="sched-type">Part-147 Recurrent Training</span>
+                  <div class="compliance-details">
+                    <div class="comp-stat"><span class="comp-lbl">Active Crew</span><span class="comp-val">412</span></div>
+                    <div class="comp-stat"><span class="comp-lbl">Simulator Hours</span><span class="comp-val">1,240h</span></div>
+                    <div class="comp-stat"><span class="comp-lbl">Upcoming Audits</span><span class="comp-val">0 flagged</span></div>
                   </div>
-                  <div class="sched-badge classroom">Classroom A</div>
+                </div>
+              </div>
+              
+              <!-- Right Column: Interactive Schedule & Crew Status -->
+              <div class="efb-col-right">
+                <div class="efb-widget-title">Live Roster Feed</div>
+                <div class="efb-card">
+                  <div class="av" style="background:rgba(0,199,255,0.15);color:#00C9FF;border:none;width:34px;height:34px;font-size:10px">CAPT</div>
+                  <div class="efb-info">
+                    <div class="efb-name">Capt. Robert Vance</div>
+                    <div class="efb-meta">B777-300ER · Senior Captain</div>
+                  </div>
+                  <div class="efb-status ok">✓ VALID</div>
+                </div>
+                <div class="efb-card">
+                  <div class="av" style="background:rgba(123,69,232,0.15);color:#9D6FF0;border:none;width:34px;height:34px;font-size:10px">F/O</div>
+                  <div class="efb-info">
+                    <div class="efb-name">Sarah Lin</div>
+                    <div class="efb-meta">A350-900 · Co-Pilot</div>
+                  </div>
+                  <div class="efb-status warn">⚠ RENEW 14d</div>
                 </div>
               </div>
             </div>
