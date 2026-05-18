@@ -128,20 +128,22 @@ nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(2
 .scard.e::before{background:linear-gradient(180deg,var(--emerald),transparent)}
 
 /* ── TESTIMONIALS ──────────────────────────────── */
-.testi-s{padding:7rem 0;background:var(--bg)}
+.testi-s{padding:7rem 0;background:var(--bg);overflow:hidden}
 .sh{text-align:center;margin-bottom:4rem}
 .sh h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-top:.5rem}
-.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.testi-carousel-wrapper{position:relative;width:100%;margin-top:3rem;overflow:visible}
+.testi-carousel{display:flex;gap:2rem;overflow-x:auto;scroll-behavior:smooth;padding:1.5rem 1rem 3rem;margin:0 -1rem;scrollbar-width:none}
+.testi-carousel::-webkit-scrollbar{display:none}
 .card-wrapper {
+  flex: 0 0 380px; /* Perfect horizontal expansion matching Image 2 */
   padding: 8px;
   filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  height: 100%;
 }
 .card-wrapper:hover {
   transform: translateY(-8px) scale(1.02);
 }
-.tc{display:flex;flex-direction:column;border-radius:20px 20px 0 20px;overflow:hidden;position:relative;height:100%;padding:2rem;color:#ffffff;clip-path:polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);transition:transform 0.3s}
+.tc{display:flex;flex-direction:column;border-radius:20px 20px 0 20px;overflow:hidden;position:relative;height:100%;min-height:510px;padding:2.25rem;color:#ffffff;clip-path:polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);transition:transform 0.3s}
 .tc::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;z-index:1}
 .tc-hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;position:relative;z-index:2}
 .av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);margin-bottom:0;flex-shrink:0}
@@ -157,6 +159,17 @@ nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(2
 .tc.p{background:linear-gradient(135deg,#7B45E8 0%,#4F1BB1 100%)}
 .tc.c{background:linear-gradient(135deg,#0088B2 0%,#005B78 100%)}
 .tc.e{background:linear-gradient(135deg,#007A60 0%,#005240 100%)}
+
+.carousel-controls{display:flex;align-items:center;gap:10px;margin-top:1.5rem;padding-left:8px}
+.carousel-btn{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--border);background:var(--card);color:var(--heading);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s ease}
+.carousel-btn:hover{background:var(--heading);color:var(--bg);border-color:var(--heading)}
+.carousel-dots{display:flex;gap:8px;margin-left:12px;align-items:center}
+.carousel-dots .dot{width:6px;height:6px;border-radius:50%;background:rgba(5,12,51,0.15);transition:all 0.25s ease}
+.carousel-dots .dot.active{background:var(--heading);transform:scale(1.4)}
+
+@media(max-width:480px){
+  .card-wrapper{flex:0 0 310px}
+}
 
 /* ── FEATURES ──────────────────────────────────── */
 .feat-s{padding:7rem 0;background:var(--bg2)}
@@ -446,80 +459,94 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
       <div class="slabel">Real Results from Real Aviation Operations</div>
       <h2>What happens when the<br><span class="grad">platform fits the operation.</span></h2>
     </div>
-    <div class="tgrid">
+    <div class="testi-carousel-wrapper">
+      <div class="testi-carousel" id="testiCarousel">
 
-      <div class="card-wrapper reveal">
-        <div class="tc o">
-          <div class="tc-hdr">
-            <div class="av">TH</div>
-            <div class="tc-meta">
-              <div class="tc-name">Tom Hargreaves</div>
-              <div class="tc-role">Training &amp; Compliance Manager · Aviation Safety Training</div>
+        <div class="card-wrapper reveal">
+          <div class="tc o">
+            <div class="tc-hdr">
+              <div class="av">TH</div>
+              <div class="tc-meta">
+                <div class="tc-name">Tom Hargreaves</div>
+                <div class="tc-role">Training &amp; Compliance Manager · Aviation Safety Training</div>
+              </div>
             </div>
-          </div>
-          <p class="tc-q">"In aviation, a missed certification record means a grounded aircraft. SimpliTrain's automated expiry tracking and one-click audit reports mean we walk into every EASA inspection completely prepared, every time."</p>
-          <div class="tc-met">
-            <div class="tc-mnum">100%</div>
-            <div class="tc-mlbl">Regulatory audit pass rate maintained</div>
-          </div>
-          <div class="tc-read">READ STORY →</div>
-        </div>
-      </div>
-
-      <div class="card-wrapper reveal" style="transition-delay:.1s">
-        <div class="tc p">
-          <div class="tc-hdr">
-            <div class="av">SR</div>
-            <div class="tc-meta">
-              <div class="tc-name">Sandra Reyes</div>
-              <div class="tc-role">Head of Crew Training · Regional Airline</div>
+            <p class="tc-q">"In aviation, a missed certification record means a grounded aircraft. SimpliTrain's automated expiry tracking and one-click audit reports mean we walk into every EASA inspection completely prepared, every time."</p>
+            <div class="tc-met">
+              <div class="tc-mnum">100%</div>
+              <div class="tc-mlbl">Regulatory audit pass rate maintained</div>
             </div>
+            <div class="tc-read">READ STORY →</div>
           </div>
-          <p class="tc-q">"We had pilots whose type ratings were expiring and nobody caught it until the roster was built. With SimpliTrain, the system flags every expiry 90 days out. Scheduling conflicts are gone. Last-minute scrambles are gone."</p>
-          <div class="tc-met">
-            <div class="tc-mnum">−90%</div>
-            <div class="tc-mlbl">Last-minute training reschedules</div>
-          </div>
-          <div class="tc-read">READ STORY →</div>
         </div>
-      </div>
 
-      <div class="card-wrapper reveal" style="transition-delay:.15s">
-        <div class="tc c">
-          <div class="tc-hdr">
-            <div class="av">MK</div>
-            <div class="tc-meta">
-              <div class="tc-name">Mohammed Al-Khatib</div>
-              <div class="tc-role">Director of Training · MRO Organisation</div>
+        <div class="card-wrapper reveal" style="transition-delay:.1s">
+          <div class="tc p">
+            <div class="tc-hdr">
+              <div class="av">SR</div>
+              <div class="tc-meta">
+                <div class="tc-name">Sandra Reyes</div>
+                <div class="tc-role">Head of Crew Training · Regional Airline</div>
+              </div>
             </div>
-          </div>
-          <p class="tc-q">"Audit preparation used to take our team three days, pulling paper records, cross-referencing spreadsheets. SimpliTrain generates a complete maintenance training compliance report in under a minute. We stopped dreading audits."</p>
-          <div class="tc-met">
-            <div class="tc-mnum" style="font-size:2.6rem">3d→60s</div>
-            <div class="tc-mlbl">Audit report generation time</div>
-          </div>
-          <div class="tc-read">READ STORY →</div>
-        </div>
-      </div>
-
-      <div class="card-wrapper reveal" style="transition-delay:.2s">
-        <div class="tc e">
-          <div class="tc-hdr">
-            <div class="av">LP</div>
-            <div class="tc-meta">
-              <div class="tc-name">Lena Petrov</div>
-              <div class="tc-role">VP Training Operations · Charter Airline</div>
+            <p class="tc-q">"We had pilots whose type ratings were expiring and nobody caught it until the roster was built. With SimpliTrain, the system flags every expiry 90 days out. Scheduling conflicts are gone. Last-minute scrambles are gone."</p>
+            <div class="tc-met">
+              <div class="tc-mnum">−90%</div>
+              <div class="tc-mlbl">Last-minute training reschedules</div>
             </div>
+            <div class="tc-read">READ STORY →</div>
           </div>
-          <p class="tc-q">"We manage training across four bases, two fleets, and 800 crew. Before SimpliTrain, each base ran its own system. Now I see every crew member's currency status, every simulator slot, and every upcoming renewal in one place."</p>
-          <div class="tc-met">
-            <div class="tc-mnum">4</div>
-            <div class="tc-mlbl">Bases managed from one dashboard</div>
-          </div>
-          <div class="tc-read">READ STORY →</div>
         </div>
-      </div>
 
+        <div class="card-wrapper reveal" style="transition-delay:.15s">
+          <div class="tc c">
+            <div class="tc-hdr">
+              <div class="av">MK</div>
+              <div class="tc-meta">
+                <div class="tc-name">Mohammed Al-Khatib</div>
+                <div class="tc-role">Director of Training · MRO Organisation</div>
+              </div>
+            </div>
+            <p class="tc-q">"Audit preparation used to take our team three days, pulling paper records, cross-referencing spreadsheets. SimpliTrain generates a complete maintenance training compliance report in under a minute. We stopped dreading audits."</p>
+            <div class="tc-met">
+              <div class="tc-mnum" style="font-size:2.6rem">3d→60s</div>
+              <div class="tc-mlbl">Audit report generation time</div>
+            </div>
+            <div class="tc-read">READ STORY →</div>
+          </div>
+        </div>
+
+        <div class="card-wrapper reveal" style="transition-delay:.2s">
+          <div class="tc e">
+            <div class="tc-hdr">
+              <div class="av">LP</div>
+              <div class="tc-meta">
+                <div class="tc-name">Lena Petrov</div>
+                <div class="tc-role">VP Training Operations · Charter Airline</div>
+              </div>
+            </div>
+            <p class="tc-q">"We manage training across four bases, two fleets, and 800 crew. Before SimpliTrain, each base ran its own system. Now I see every crew member's currency status, every simulator slot, and every upcoming renewal in one place."</p>
+            <div class="tc-met">
+              <div class="tc-mnum">4</div>
+              <div class="tc-mlbl">Bases managed from one dashboard</div>
+            </div>
+            <div class="tc-read">READ STORY →</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Carousel Controls (Prev/Next arrows + Page Dots) matching Image 2 -->
+    <div class="carousel-controls reveal">
+      <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous testimonials">‹</button>
+      <button class="carousel-btn next" id="carouselNext" aria-label="Next testimonials">›</button>
+      <div class="carousel-dots" id="carouselDots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
     </div>
   </div>
 </section>
@@ -858,6 +885,38 @@ document.querySelectorAll('.fq').forEach(btn=>{
     document.querySelectorAll('.fi').forEach(i=>i.classList.remove('op'));
     if(!open)item.classList.add('op');
   });
+});
+
+// Testimonials Carousel Controls
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.getElementById('testiCarousel');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  const dots = document.querySelectorAll('#carouselDots .dot');
+  
+  if (carousel && prevBtn && nextBtn) {
+    const cardWidth = 380 + 32; // card width + gap
+    
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+    
+    carousel.addEventListener('scroll', () => {
+      const scrollPosition = carousel.scrollLeft;
+      const index = Math.round(scrollPosition / cardWidth);
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    });
+  }
 });
 </script>
 </body>
