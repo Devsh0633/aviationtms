@@ -180,9 +180,99 @@ nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(2
 
 /* ── FEATURES ──────────────────────────────────── */
 .feat-s{padding:7rem 0;background:var(--bg2)}
-.fb{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:4.5rem 0;border-bottom:1px solid var(--border)}
-.fb:last-child{border-bottom:none}
-.fb.rev .fvis{order:-1}
+
+.features-carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+.features-track-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+}
+.features-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 32px;
+}
+.fb {
+  flex: 0 0 calc(50% - 16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  margin-bottom: 0 !important;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  order: unset !important;
+}
+.fb:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 107, 53, 0.25);
+}
+.fb .feat-text {
+  order: 1;
+}
+.fb .fvis {
+  order: 2;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Carousel Nav controls */
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+.nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.nav-btn:hover:not(:disabled) {
+  background: var(--card);
+  border-color: rgba(255, 107, 53, 0.3);
+  color: #FFF;
+  transform: translateY(-2px);
+}
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.carousel-dots .dot.active {
+  background: #FF6B35;
+  transform: scale(1.4);
+}
+
 .flbl{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
 .fico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
 .fh2{font-size:clamp(1.5rem,2.5vw,2.1rem);font-weight:700;margin:.75rem 0}
@@ -313,7 +403,7 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 /* ── RESPONSIVE ────────────────────────────────── */
 @media(max-width:960px){
   .stats-g,.tgrid,.pgrid{grid-template-columns:1fr}
-  .fb{grid-template-columns:1fr}.fb.rev .fvis{order:0}
+  .fb{flex:0 0 100%}.fb.rev .fvis{order:2}
   .igrid{grid-template-columns:repeat(2,1fr)}.rgrid{grid-template-columns:repeat(2,1fr)}
   .nav-l{display:none}.fi-row{flex-direction:column}
   
@@ -602,126 +692,147 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 <section class="feat-s" id="features">
   <div class="c">
 
-    <!-- F1: Scheduler -->
-    <div class="fb reveal">
-      <div class="feat-text">
-        <div class="flbl"><div class="fico" style="background:rgba(123,69,232,.12)">🗓</div><span class="tag tag-p">No More Spreadsheets</span></div>
-        <h2 class="fh2">Schedule Every Crew.<br>Every Base. In One Place.</h2>
-        <p class="fbody">One intelligent scheduler for pilots, cabin crew, MRO engineers, and ground ops — across every base and fleet type. Training conflicts flagged before they reach operations.</p>
-      </div>
-      <div class="fvis">
-        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Crew Training Scheduler</div></div>
-        <div class="fp">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><span style="font-size:12px;color:var(--muted)">This Week · All Bases</span><span class="cst ok">✓ No conflicts</span></div>
-          <div class="crow">
-            <div class="cbadge" style="background:linear-gradient(135deg,#7B45E8,#9D6FF0)">JP</div>
-            <div style="flex:1"><div class="cname">James Park <span style="color:var(--muted);font-weight:400;font-size:12px">(A320 Captain)</span></div><div class="ctype">Type Rating Renewal · LHR · Mon 09:00</div></div>
-            <span class="cst ok">Scheduled</span>
+    <div class="features-carousel-wrapper">
+      <div class="features-track-container">
+        <div class="features-track" id="features-track">
+
+          <!-- F1: Scheduler -->
+          <div class="fb">
+            <div class="feat-text">
+              <div class="flbl"><div class="fico" style="background:rgba(123,69,232,.12)">🗓</div><span class="tag tag-p">No More Spreadsheets</span></div>
+              <h2 class="fh2">Schedule Every Crew.<br>Every Base. In One Place.</h2>
+              <p class="fbody">One intelligent scheduler for pilots, cabin crew, MRO engineers, and ground ops — across every base and fleet type. Training conflicts flagged before they reach operations.</p>
+            </div>
+            <div class="fvis">
+              <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Crew Training Scheduler</div></div>
+              <div class="fp">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><span style="font-size:12px;color:var(--muted)">This Week · All Bases</span><span class="cst ok">✓ No conflicts</span></div>
+                <div class="crow">
+                  <div class="cbadge" style="background:linear-gradient(135deg,#7B45E8,#9D6FF0)">JP</div>
+                  <div style="flex:1"><div class="cname">James Park <span style="color:var(--muted);font-weight:400;font-size:12px">(A320 Captain)</span></div><div class="ctype">Type Rating Renewal · LHR · Mon 09:00</div></div>
+                  <span class="cst ok">Scheduled</span>
+                </div>
+                <div class="crow">
+                  <div class="cbadge" style="background:linear-gradient(135deg,#FF6B35,#FF8C5A)">MR</div>
+                  <div style="flex:1"><div class="cname">Maria Rodriguez <span style="color:var(--muted);font-weight:400;font-size:12px">(Cabin Crew)</span></div><div class="ctype">Safety Refresher · MAD · Tue 14:00</div></div>
+                  <span class="cst warn">Expiring 28d</span>
+                </div>
+                <div class="crow">
+                  <div class="cbadge" style="background:linear-gradient(135deg,#00D4A0,#00C9FF)">AK</div>
+                  <div style="flex:1"><div class="cname">Ahmed Khalid <span style="color:var(--muted);font-weight:400;font-size:12px">(MRO Engineer)</span></div><div class="ctype">Part-66 Module · DXB · Wed 09:00</div></div>
+                  <span class="cst ok">Confirmed</span>
+                </div>
+                <div class="crow">
+                  <div class="cbadge" style="background:linear-gradient(135deg,#FFB830,#FF6B35)">SK</div>
+                  <div style="flex:1"><div class="cname">Sophie Koch <span style="color:var(--muted);font-weight:400;font-size:12px">(B737 F/O)</span></div><div class="ctype">CRM Refresher · FRA · Thu 10:00</div></div>
+                  <span class="cst ok">Scheduled</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="crow">
-            <div class="cbadge" style="background:linear-gradient(135deg,#FF6B35,#FF8C5A)">MR</div>
-            <div style="flex:1"><div class="cname">Maria Rodriguez <span style="color:var(--muted);font-weight:400;font-size:12px">(Cabin Crew)</span></div><div class="ctype">Safety Refresher · MAD · Tue 14:00</div></div>
-            <span class="cst warn">Expiring 28d</span>
+
+          <!-- F2: Certs -->
+          <div class="fb">
+            <div class="feat-text">
+              <div class="flbl"><div class="fico" style="background:rgba(255,107,53,.12)">🔔</div><span class="tag tag-o">Zero Missed Renewals</span></div>
+              <h2 class="fh2">Certifications That<br>Never Slip Through.</h2>
+              <p class="fbody">Automated alerts at 90, 60, and 30 days before every type rating, recurrent check, and safety certification expires. No crew grounded. No last-minute panic.</p>
+            </div>
+            <div class="fvis">
+              <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Certification Tracker · 847 records</div></div>
+              <div class="fp">
+                <div class="certrow">
+                  <div class="cico" style="background:rgba(255,69,87,.1)">⚠</div>
+                  <div class="cinfo"><div class="cname2">A320 Type Rating — Capt. J. Park</div><div class="cdate">Expires 15 Jun 2025 · Alerts sent at 90, 60 &amp; 30 days</div></div>
+                  <span class="cbdg calert">12 days</span>
+                </div>
+                <div class="certrow">
+                  <div class="cico" style="background:rgba(255,107,53,.1)">🔔</div>
+                  <div class="cinfo"><div class="cname2">Dangerous Goods — M. Rodriguez</div><div class="cdate">Expires 03 Jul 2025 · Next reminder in 2 days</div></div>
+                  <span class="cbdg cwarn">30 days</span>
+                </div>
+                <div class="certrow">
+                  <div class="cico" style="background:rgba(0,212,160,.1)">✅</div>
+                  <div class="cinfo"><div class="cname2">Line Check — S. Koch</div><div class="cdate">Renewed Jan 2025 · Valid until Jan 2026</div></div>
+                  <span class="cbdg csafe">Current</span>
+                </div>
+                <div class="certrow">
+                  <div class="cico" style="background:rgba(0,212,160,.1)">✅</div>
+                  <div class="cinfo"><div class="cname2">Emergency Procedures — A. Khalid</div><div class="cdate">Renewed Mar 2025 · Valid until Mar 2026</div></div>
+                  <span class="cbdg csafe">Current</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="crow">
-            <div class="cbadge" style="background:linear-gradient(135deg,#00D4A0,#00C9FF)">AK</div>
-            <div style="flex:1"><div class="cname">Ahmed Khalid <span style="color:var(--muted);font-weight:400;font-size:12px">(MRO Engineer)</span></div><div class="ctype">Part-66 Module · DXB · Wed 09:00</div></div>
-            <span class="cst ok">Confirmed</span>
+
+          <!-- F3: Audit -->
+          <div class="fb">
+            <div class="feat-text">
+              <div class="flbl"><div class="fico" style="background:rgba(0,201,255,.12)">📋</div><span class="tag tag-c">Audit Confidence</span></div>
+              <h2 class="fh2">Walk Into Every Inspection<br>Fully Prepared.</h2>
+              <p class="fbody">One-click audit reports formatted for EASA, FAA, ICAO, and IATA inspectors, generated in under 60 seconds. What used to take two days now takes one click.</p>
+            </div>
+            <div class="fvis">
+              <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">EASA Compliance Report</div></div>
+              <div class="fp">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+                  <div><div style="font-size:14px;font-weight:600;color:var(--heading)">Q2 2025 Audit Pack</div><div style="font-size:12px;color:var(--muted)">Generated in 0:48 sec · 847 crew records</div></div>
+                  <span class="cst ok">✓ Export Ready</span>
+                </div>
+                <div class="abarlbl"><span>Pilot Certifications</span><span style="color:var(--emerald)">100%</span></div>
+                <div class="abar"><div class="abarfill" style="width:100%;background:var(--emerald)"></div></div>
+                <div class="abarlbl"><span>Cabin Crew Records</span><span style="color:var(--emerald)">100%</span></div>
+                <div class="abar"><div class="abarfill" style="width:100%;background:var(--emerald)"></div></div>
+                <div class="abarlbl"><span>MRO Part-66 Training</span><span style="color:var(--cyan)">98%</span></div>
+                <div class="abar"><div class="abarfill" style="width:98%;background:var(--cyan)"></div></div>
+                <div class="ameta">Regulatory Authority: <strong>EASA Part-145</strong></div>
+                <div class="ameta">Inspection Date: <strong>18 Jun 2025</strong></div>
+                <div class="ameta">Scope: <strong>847 crew · 4 bases · 2 fleets</strong></div>
+              </div>
+            </div>
           </div>
-          <div class="crow">
-            <div class="cbadge" style="background:linear-gradient(135deg,#FFB830,#FF6B35)">SK</div>
-            <div style="flex:1"><div class="cname">Sophie Koch <span style="color:var(--muted);font-weight:400;font-size:12px">(B737 F/O)</span></div><div class="ctype">CRM Refresher · FRA · Thu 10:00</div></div>
-            <span class="cst ok">Scheduled</span>
+
+          <!-- F4: Dashboard -->
+          <div class="fb">
+            <div class="feat-text">
+              <div class="flbl"><div class="fico" style="background:rgba(0,212,160,.12)">📊</div><span class="tag tag-e">Full Crew Visibility</span></div>
+              <h2 class="fh2">See Every Gap Before It<br>Grounds a Flight.</h2>
+              <p class="fbody">Real-time currency status for every crew member, every role, every base — in one dashboard. Spot gaps days or weeks before they become operational problems.</p>
+            </div>
+            <div class="fvis">
+              <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Operations Dashboard · Live</div></div>
+              <div class="fp">
+                <div class="dgrid">
+                  <div class="dmini"><div class="dnum" style="color:var(--emerald)">847</div><div class="dlbl">Crew current</div></div>
+                  <div class="dmini"><div class="dnum" style="color:var(--orange)">12</div><div class="dlbl">Expiring &lt;30d</div></div>
+                  <div class="dmini"><div class="dnum" style="color:var(--cyan)">4</div><div class="dlbl">Bases live</div></div>
+                  <div class="dmini"><div class="dnum" style="color:var(--purple-l)">2</div><div class="dlbl">Fleet types</div></div>
+                </div>
+                <div class="dpbl"><span>LHR — Pilot currency</span><span style="color:var(--emerald)">98%</span></div>
+                <div class="dpb"><div class="dpbf" style="width:98%;background:var(--emerald)"></div></div>
+                <div class="dpbl"><span>MAD — Cabin crew records</span><span style="color:var(--emerald)">100%</span></div>
+                <div class="dpb"><div class="dpbf" style="width:100%;background:var(--emerald)"></div></div>
+                <div class="dpbl"><span>DXB — MRO Part-66 coverage</span><span style="color:var(--orange)">91%</span></div>
+                <div class="dpb"><div class="dpbf" style="width:91%;background:var(--orange)"></div></div>
+                <div class="dpbl"><span>FRA — Ground ops safety</span><span style="color:var(--cyan)">95%</span></div>
+                <div class="dpb"><div class="dpbf" style="width:95%;background:var(--cyan)"></div></div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
-    </div>
 
-    <!-- F2: Certs -->
-    <div class="fb rev reveal">
-      <div class="feat-text">
-        <div class="flbl"><div class="fico" style="background:rgba(255,107,53,.12)">🔔</div><span class="tag tag-o">Zero Missed Renewals</span></div>
-        <h2 class="fh2">Certifications That<br>Never Slip Through.</h2>
-        <p class="fbody">Automated alerts at 90, 60, and 30 days before every type rating, recurrent check, and safety certification expires. No crew grounded. No last-minute panic.</p>
-      </div>
-      <div class="fvis">
-        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Certification Tracker · 847 records</div></div>
-        <div class="fp">
-          <div class="certrow">
-            <div class="cico" style="background:rgba(255,69,87,.1)">⚠</div>
-            <div class="cinfo"><div class="cname2">A320 Type Rating — Capt. J. Park</div><div class="cdate">Expires 15 Jun 2025 · Alerts sent at 90, 60 &amp; 30 days</div></div>
-            <span class="cbdg calert">12 days</span>
-          </div>
-          <div class="certrow">
-            <div class="cico" style="background:rgba(255,107,53,.1)">🔔</div>
-            <div class="cinfo"><div class="cname2">Dangerous Goods — M. Rodriguez</div><div class="cdate">Expires 03 Jul 2025 · Next reminder in 2 days</div></div>
-            <span class="cbdg cwarn">30 days</span>
-          </div>
-          <div class="certrow">
-            <div class="cico" style="background:rgba(0,212,160,.1)">✅</div>
-            <div class="cinfo"><div class="cname2">Line Check — S. Koch</div><div class="cdate">Renewed Jan 2025 · Valid until Jan 2026</div></div>
-            <span class="cbdg csafe">Current</span>
-          </div>
-          <div class="certrow">
-            <div class="cico" style="background:rgba(0,212,160,.1)">✅</div>
-            <div class="cinfo"><div class="cname2">Emergency Procedures — A. Khalid</div><div class="cdate">Renewed Mar 2025 · Valid until Mar 2026</div></div>
-            <span class="cbdg csafe">Current</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- F3: Audit -->
-    <div class="fb reveal">
-      <div class="feat-text">
-        <div class="flbl"><div class="fico" style="background:rgba(0,201,255,.12)">📋</div><span class="tag tag-c">Audit Confidence</span></div>
-        <h2 class="fh2">Walk Into Every Inspection<br>Fully Prepared.</h2>
-        <p class="fbody">One-click audit reports formatted for EASA, FAA, ICAO, and IATA inspectors, generated in under 60 seconds. What used to take two days now takes one click.</p>
-      </div>
-      <div class="fvis">
-        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">EASA Compliance Report</div></div>
-        <div class="fp">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
-            <div><div style="font-size:14px;font-weight:600;color:var(--heading)">Q2 2025 Audit Pack</div><div style="font-size:12px;color:var(--muted)">Generated in 0:48 sec · 847 crew records</div></div>
-            <span class="cst ok">✓ Export Ready</span>
-          </div>
-          <div class="abarlbl"><span>Pilot Certifications</span><span style="color:var(--emerald)">100%</span></div>
-          <div class="abar"><div class="abarfill" style="width:100%;background:var(--emerald)"></div></div>
-          <div class="abarlbl"><span>Cabin Crew Records</span><span style="color:var(--emerald)">100%</span></div>
-          <div class="abar"><div class="abarfill" style="width:100%;background:var(--emerald)"></div></div>
-          <div class="abarlbl"><span>MRO Part-66 Training</span><span style="color:var(--cyan)">98%</span></div>
-          <div class="abar"><div class="abarfill" style="width:98%;background:var(--cyan)"></div></div>
-          <div class="ameta">Regulatory Authority: <strong>EASA Part-145</strong></div>
-          <div class="ameta">Inspection Date: <strong>18 Jun 2025</strong></div>
-          <div class="ameta">Scope: <strong>847 crew · 4 bases · 2 fleets</strong></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- F4: Dashboard -->
-    <div class="fb rev reveal">
-      <div class="feat-text">
-        <div class="flbl"><div class="fico" style="background:rgba(0,212,160,.12)">📊</div><span class="tag tag-e">Full Crew Visibility</span></div>
-        <h2 class="fh2">See Every Gap Before It<br>Grounds a Flight.</h2>
-        <p class="fbody">Real-time currency status for every crew member, every role, every base — in one dashboard. Spot gaps days or weeks before they become operational problems.</p>
-      </div>
-      <div class="fvis">
-        <div class="fv-hdr"><div class="dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div><div class="ftitle">Operations Dashboard · Live</div></div>
-        <div class="fp">
-          <div class="dgrid">
-            <div class="dmini"><div class="dnum" style="color:var(--emerald)">847</div><div class="dlbl">Crew current</div></div>
-            <div class="dmini"><div class="dnum" style="color:var(--orange)">12</div><div class="dlbl">Expiring &lt;30d</div></div>
-            <div class="dmini"><div class="dnum" style="color:var(--cyan)">4</div><div class="dlbl">Bases live</div></div>
-            <div class="dmini"><div class="dnum" style="color:var(--purple-l)">2</div><div class="dlbl">Fleet types</div></div>
-          </div>
-          <div class="dpbl"><span>LHR — Pilot currency</span><span style="color:var(--emerald)">98%</span></div>
-          <div class="dpb"><div class="dpbf" style="width:98%;background:var(--emerald)"></div></div>
-          <div class="dpbl"><span>MAD — Cabin crew records</span><span style="color:var(--emerald)">100%</span></div>
-          <div class="dpb"><div class="dpbf" style="width:100%;background:var(--emerald)"></div></div>
-          <div class="dpbl"><span>DXB — MRO Part-66 coverage</span><span style="color:var(--orange)">91%</span></div>
-          <div class="dpb"><div class="dpbf" style="width:91%;background:var(--orange)"></div></div>
-          <div class="dpbl"><span>FRA — Ground ops safety</span><span style="color:var(--cyan)">95%</span></div>
-          <div class="dpb"><div class="dpbf" style="width:95%;background:var(--cyan)"></div></div>
+      <!-- Nav Controls -->
+      <div class="carousel-nav" style="margin-top: 40px;">
+        <button class="nav-btn" id="prev-features" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="nav-btn" id="next-features">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="carousel-dots" id="features-dots">
+          <!-- JS will populate -->
         </div>
       </div>
     </div>
@@ -962,6 +1073,68 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+});
+
+// Features Carousel Controls
+document.addEventListener('DOMContentLoaded', function() {
+  const track = document.getElementById('features-track');
+  const prevBtn = document.getElementById('prev-features');
+  const nextBtn = document.getElementById('next-features');
+  const dotsContainer = document.getElementById('features-dots');
+  if(!track || !prevBtn || !nextBtn || !dotsContainer) return;
+  const cards = Array.from(track.children);
+  
+  let currentIndex = 0;
+  const totalCards = cards.length;
+  
+  // Create dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => jumpToIndex(i));
+    dotsContainer.appendChild(dot);
+  });
+  
+  const dots = Array.from(dotsContainer.children);
+
+  function updateCarousel() {
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 32;
+    const offset = currentIndex * (cardWidth + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+    
+    prevBtn.disabled = currentIndex === 0;
+    
+    const visibleCount = window.innerWidth >= 960 ? 2 : 1;
+    nextBtn.disabled = currentIndex >= totalCards - Math.floor(visibleCount);
+    
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function jumpToIndex(index) {
+    currentIndex = index;
+    updateCarousel();
+  }
+
+  nextBtn.addEventListener('click', () => {
+    const visibleCount = window.innerWidth >= 960 ? 2 : 1;
+    if (currentIndex < totalCards - Math.floor(visibleCount)) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  window.addEventListener('resize', updateCarousel);
+  setTimeout(updateCarousel, 150);
 });
 </script>
 </body>
