@@ -131,30 +131,32 @@ nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(2
 .testi-s{padding:7rem 0;background:var(--bg)}
 .sh{text-align:center;margin-bottom:4rem}
 .sh h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-top:.5rem}
-.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
 .card-wrapper {
   padding: 8px;
-  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.25)) 
-          drop-shadow(0 5px 5px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   height: 100%;
 }
 .card-wrapper:hover {
-  transform: translateY(-6px) scale(1.015);
+  transform: translateY(-8px) scale(1.02);
 }
-.tc{display:flex;border-radius:0 24px 0 24px;overflow:hidden;background:var(--card);box-shadow:inset 0 0 0 1.5px rgba(5,12,51,0.08);clip-path:polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);transition:border-color .3s;height:100%}
-.tc-m{flex:1;padding:2rem;position:relative;z-index:2}
-.av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:.75rem;flex-shrink:0}
-.tc-name{font-size:15px;font-weight:600;color:var(--heading)}
-.tc-role{font-size:13px;color:var(--muted);margin-bottom:1rem}
-.tc-q{font-size:14px;font-style:italic;color:var(--text);line-height:1.75;border-left:3px solid;padding-left:1rem}
-.tc-met{width:155px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 1rem;text-align:center;position:relative;z-index:2;border-left:1px solid var(--border)}
-.tc-mnum{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;line-height:1;margin-bottom:6px}
-.tc-mlbl{font-size:12px;line-height:1.4;color:var(--muted)}
-.tc.o .av{background:linear-gradient(135deg,#FF6B35,#FF8C5A)}.tc.o .tc-q{border-color:var(--orange)}.tc.o .tc-met{background:#FFF4F0}.tc.o .tc-mnum{color:var(--orange)}
-.tc.p .av{background:linear-gradient(135deg,#7B45E8,#9D6FF0)}.tc.p .tc-q{border-color:var(--purple-l)}.tc.p .tc-met{background:#F5F3FF}.tc.p .tc-mnum{color:var(--purple-l)}
-.tc.c .av{background:linear-gradient(135deg,#0088B2,#00C9FF)}.tc.c .tc-q{border-color:var(--cyan)}.tc.c .tc-met{background:#F0FDFE}.tc.c .tc-mnum{color:var(--cyan)}
-.tc.e .av{background:linear-gradient(135deg,#007A60,#00D4A0)}.tc.e .tc-q{border-color:var(--emerald)}.tc.e .tc-met{background:#F0FDF4}.tc.e .tc-mnum{color:var(--emerald)}
+.tc{display:flex;flex-direction:column;border-radius:20px 20px 0 20px;overflow:hidden;position:relative;height:100%;padding:2rem;color:#ffffff;clip-path:polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);transition:transform 0.3s}
+.tc::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;z-index:1}
+.tc-hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;position:relative;z-index:2}
+.av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);margin-bottom:0;flex-shrink:0}
+.tc-meta{flex:1;display:flex;flex-direction:column}
+.tc-name{font-size:15px;font-weight:700;color:#ffffff;line-height:1.2}
+.tc-role{font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:0;margin-top:2px;line-height:1.3}
+.tc-q{font-size:14px;color:#ffffff;line-height:1.65;position:relative;z-index:2;margin-bottom:2rem;flex-grow:1;border:none;padding-left:0;font-style:normal}
+.tc-met{width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:0;text-align:left;position:relative;z-index:2;border-left:none;margin-top:auto}
+.tc-mnum{font-size:3.2rem;font-weight:800;line-height:1;margin-bottom:4px;color:#ffffff}
+.tc-mlbl{font-size:13px;line-height:1.4;color:rgba(255,255,255,0.8)}
+.tc-read{font-size:11px;font-weight:700;letter-spacing:0.05em;color:#ffffff;text-transform:uppercase;margin-top:1.5rem;display:block;position:relative;z-index:2}
+.tc.o{background:linear-gradient(135deg,#FF6B35 0%,#D84A16 100%)}
+.tc.p{background:linear-gradient(135deg,#7B45E8 0%,#4F1BB1 100%)}
+.tc.c{background:linear-gradient(135deg,#0088B2 0%,#005B78 100%)}
+.tc.e{background:linear-gradient(135deg,#007A60 0%,#005240 100%)}
 
 /* ── FEATURES ──────────────────────────────────── */
 .feat-s{padding:7rem 0;background:var(--bg2)}
@@ -448,49 +450,73 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 
       <div class="card-wrapper reveal">
         <div class="tc o">
-          <div class="tc-m">
+          <div class="tc-hdr">
             <div class="av">TH</div>
-            <div class="tc-name">Tom Hargreaves</div>
-            <div class="tc-role">Training &amp; Compliance Manager · Aviation Safety Training Centre</div>
-            <p class="tc-q">"In aviation, a missed certification record means a grounded aircraft. SimpliTrain's automated expiry tracking and one-click audit reports mean we walk into every EASA inspection completely prepared, every time."</p>
+            <div class="tc-meta">
+              <div class="tc-name">Tom Hargreaves</div>
+              <div class="tc-role">Training &amp; Compliance Manager · Aviation Safety Training</div>
+            </div>
           </div>
-          <div class="tc-met"><div class="tc-mnum">100%</div><div class="tc-mlbl">Regulatory audit pass rate maintained</div></div>
+          <p class="tc-q">"In aviation, a missed certification record means a grounded aircraft. SimpliTrain's automated expiry tracking and one-click audit reports mean we walk into every EASA inspection completely prepared, every time."</p>
+          <div class="tc-met">
+            <div class="tc-mnum">100%</div>
+            <div class="tc-mlbl">Regulatory audit pass rate maintained</div>
+          </div>
+          <div class="tc-read">READ STORY →</div>
         </div>
       </div>
 
       <div class="card-wrapper reveal" style="transition-delay:.1s">
         <div class="tc p">
-          <div class="tc-m">
+          <div class="tc-hdr">
             <div class="av">SR</div>
-            <div class="tc-name">Sandra Reyes</div>
-            <div class="tc-role">Head of Crew Training · Regional Airline, Latin America</div>
-            <p class="tc-q">"We had pilots whose type ratings were expiring and nobody caught it until the roster was built. With SimpliTrain, the system flags every expiry 90 days out. Scheduling conflicts are gone. Last-minute scrambles are gone."</p>
+            <div class="tc-meta">
+              <div class="tc-name">Sandra Reyes</div>
+              <div class="tc-role">Head of Crew Training · Regional Airline</div>
+            </div>
           </div>
-          <div class="tc-met"><div class="tc-mnum">−90%</div><div class="tc-mlbl">Last-minute training reschedules</div></div>
+          <p class="tc-q">"We had pilots whose type ratings were expiring and nobody caught it until the roster was built. With SimpliTrain, the system flags every expiry 90 days out. Scheduling conflicts are gone. Last-minute scrambles are gone."</p>
+          <div class="tc-met">
+            <div class="tc-mnum">−90%</div>
+            <div class="tc-mlbl">Last-minute training reschedules</div>
+          </div>
+          <div class="tc-read">READ STORY →</div>
         </div>
       </div>
 
       <div class="card-wrapper reveal" style="transition-delay:.15s">
         <div class="tc c">
-          <div class="tc-m">
+          <div class="tc-hdr">
             <div class="av">MK</div>
-            <div class="tc-name">Mohammed Al-Khatib</div>
-            <div class="tc-role">Director of Training · MRO Organisation, Middle East</div>
-            <p class="tc-q">"Audit preparation used to take our team three days, pulling paper records, cross-referencing spreadsheets. SimpliTrain generates a complete maintenance training compliance report in under a minute. We stopped dreading audits."</p>
+            <div class="tc-meta">
+              <div class="tc-name">Mohammed Al-Khatib</div>
+              <div class="tc-role">Director of Training · MRO Organisation</div>
+            </div>
           </div>
-          <div class="tc-met"><div class="tc-mnum" style="font-size:1.5rem">3d→60s</div><div class="tc-mlbl">Audit report generation time</div></div>
+          <p class="tc-q">"Audit preparation used to take our team three days, pulling paper records, cross-referencing spreadsheets. SimpliTrain generates a complete maintenance training compliance report in under a minute. We stopped dreading audits."</p>
+          <div class="tc-met">
+            <div class="tc-mnum" style="font-size:2.6rem">3d→60s</div>
+            <div class="tc-mlbl">Audit report generation time</div>
+          </div>
+          <div class="tc-read">READ STORY →</div>
         </div>
       </div>
 
       <div class="card-wrapper reveal" style="transition-delay:.2s">
         <div class="tc e">
-          <div class="tc-m">
+          <div class="tc-hdr">
             <div class="av">LP</div>
-            <div class="tc-name">Lena Petrov</div>
-            <div class="tc-role">VP Training Operations · Charter Airline Group, Europe</div>
-            <p class="tc-q">"We manage training across four bases, two fleets, and 800 crew. Before SimpliTrain, each base ran its own system. Now I see every crew member's currency status, every simulator slot, and every upcoming renewal in one place."</p>
+            <div class="tc-meta">
+              <div class="tc-name">Lena Petrov</div>
+              <div class="tc-role">VP Training Operations · Charter Airline</div>
+            </div>
           </div>
-          <div class="tc-met"><div class="tc-mnum">4</div><div class="tc-mlbl">Bases managed from one dashboard</div></div>
+          <p class="tc-q">"We manage training across four bases, two fleets, and 800 crew. Before SimpliTrain, each base ran its own system. Now I see every crew member's currency status, every simulator slot, and every upcoming renewal in one place."</p>
+          <div class="tc-met">
+            <div class="tc-mnum">4</div>
+            <div class="tc-mlbl">Bases managed from one dashboard</div>
+          </div>
+          <div class="tc-read">READ STORY →</div>
         </div>
       </div>
 
