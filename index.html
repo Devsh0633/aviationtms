@@ -109,6 +109,37 @@ nav .btn-s{color:#ffffff !important;border:1px solid rgba(255,255,255,0.2) !impo
 nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(255,255,255,.3) !important}
 .hero-watermark{position:absolute;right:-50px;top:50%;transform:translateY(-50%);font-family:'Poppins',sans-serif;font-size:11.5rem;font-weight:900;color:rgba(255,255,255,0.012);pointer-events:none;z-index:-1;letter-spacing:0.12em;white-space:nowrap}
 
+/* ── BUILT FOR INDUSTRY ───────────────────────── */
+.bfi-s{padding:6rem 0;background:var(--bg);position:relative;overflow:hidden}
+.bfi-s::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.bfi-s::after{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(255,107,53,0.06) 0%,transparent 70%);pointer-events:none}
+.bfi-top{text-align:center;margin-bottom:3.5rem;position:relative;z-index:1}
+.bfi-label{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.2);padding:6px 16px;border-radius:100px;margin-bottom:1.25rem}
+.bfi-h2{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;color:var(--heading);line-height:1.2;margin-bottom:.75rem}
+.bfi-sub{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.65}
+.bfi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative;z-index:1}
+.bfi-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1rem;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.bfi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;transition:opacity .3s}
+.bfi-card.ac::before{background:linear-gradient(90deg,#0090FF,#00C9FF)}
+.bfi-card.mro::before{background:linear-gradient(90deg,#FF6B35,#FFB830)}
+.bfi-card.ato::before{background:linear-gradient(90deg,#7B45E8,#00D4A0)}
+.bfi-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.12);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.bfi-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.bfi-card.ac .bfi-icon{background:rgba(0,144,255,.12)}
+.bfi-card.mro .bfi-icon{background:rgba(255,107,53,.12)}
+.bfi-card.ato .bfi-icon{background:rgba(123,69,232,.12)}
+.bfi-ch3{font-size:1.1rem;font-weight:700;color:var(--heading);line-height:1.3}
+.bfi-body{font-size:14.5px;color:var(--muted);line-height:1.7;flex:1}
+.bfi-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.05em}
+.bfi-card.ac .bfi-tag{background:rgba(0,144,255,.12);color:#00C9FF}
+.bfi-card.mro .bfi-tag{background:rgba(255,107,53,.12);color:var(--orange)}
+.bfi-card.ato .bfi-tag{background:rgba(123,69,232,.12);color:var(--purple-l)}
+.bfi-footer{margin-top:3rem;text-align:center;position:relative;z-index:1}
+.bfi-closer{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(255,107,53,.08),rgba(0,201,255,.06));border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:14px 32px;font-size:15px;font-weight:600;color:var(--heading);letter-spacing:-.01em}
+.bfi-closer span{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+@media(max-width:960px){.bfi-grid{grid-template-columns:1fr}}
+
 /* ── MARQUEE ───────────────────────────────────── */
 .marq{padding:2.25rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden}
 .marq-lbl{text-align:center;font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.05em;margin-bottom:1.25rem}
@@ -515,6 +546,57 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
         <p class="hero-note" style="text-align:left;margin-top:1rem;color:rgba(255,255,255,0.4)">Flat-rate pricing · No per-crew fees · Live in 2 weeks</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ BUILT FOR INDUSTRY ═══════════════════ -->
+<section class="bfi-s">
+  <div class="c">
+
+    <div class="bfi-top reveal">
+      <div class="bfi-label">✈ Built for Aviation Industry</div>
+      <h2 class="bfi-h2">Whether you're managing a fleet,<br>a hangar, or an academy —</h2>
+      <p class="bfi-sub">SimpliTrain adapts to your operational complexity</p>
+    </div>
+
+    <div class="bfi-grid">
+
+      <div class="bfi-card ac reveal">
+        <div class="bfi-icon">✈</div>
+        <div>
+          <span class="bfi-tag">Commercial Airlines</span>
+          <h3 class="bfi-ch3" style="margin-top:.75rem">Managing global crew operations</h3>
+        </div>
+        <p class="bfi-body">Track certifications, schedule recurrent training, and maintain audit-ready records across every base and fleet type — all in one unified dashboard.</p>
+      </div>
+
+      <div class="bfi-card mro reveal" style="transition-delay:.1s">
+        <div class="bfi-icon">🔧</div>
+        <div>
+          <span class="bfi-tag">MRO Organisations</span>
+          <h3 class="bfi-ch3" style="margin-top:.75rem">Ensuring regulatory compliance</h3>
+        </div>
+        <p class="bfi-body">Stay EASA Part-145 and FAA compliant with automated expiry alerts, one-click audit packs, and full Part-66 training records for every engineer on your floor.</p>
+      </div>
+
+      <div class="bfi-card ato reveal" style="transition-delay:.2s">
+        <div class="bfi-icon">🎓</div>
+        <div>
+          <span class="bfi-tag">Training Academies &amp; ATOs</span>
+          <h3 class="bfi-ch3" style="margin-top:.75rem">Scaling pilot programs</h3>
+        </div>
+        <p class="bfi-body">Grow your cadet intake without growing your admin overhead. Manage simulator slots, ground school cohorts, and pilot licensing milestones from one platform.</p>
+      </div>
+
+    </div>
+
+    <div class="bfi-footer reveal">
+      <div class="bfi-closer">
+        <span></span>
+        SimpliTrain adapts to your operational complexity — from 50 crew to 50,000
+      </div>
+    </div>
+
   </div>
 </section>
 
