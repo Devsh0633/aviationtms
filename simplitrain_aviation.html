@@ -87,34 +87,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
   left: 0;
   width: 24px;
   height: 24px;
-  offset-rotate: 0deg;
+  offset-rotate: auto 90deg;
   pointer-events: none;
   z-index: 10;
 }
 .flight-1 {
-  offset-path: path('M 100,200 L 1500,200');
+  offset-path: path('M 100,300 Q 800,100 1500,300');
   animation: fly-route-1 24s infinite linear;
 }
 .flight-1b {
-  offset-path: path('M 100,200 L 1500,200');
+  offset-path: path('M 100,300 Q 800,100 1500,300');
   animation: fly-route-1 24s infinite linear;
   animation-delay: -12s;
 }
 .flight-2 {
-  offset-path: path('M 150,1400 L 150,200');
+  offset-path: path('M 350,1400 Q 150,800 350,200');
   animation: fly-route-2 20s infinite linear;
 }
 .flight-2b {
-  offset-path: path('M 150,1400 L 150,200');
+  offset-path: path('M 350,1400 Q 150,800 350,200');
   animation: fly-route-2 20s infinite linear;
   animation-delay: -10s;
 }
 .flight-3 {
-  offset-path: path('M 200,1100 L 1400,1100');
+  offset-path: path('M 100,1100 Q 800,1300 1500,1100');
   animation: fly-route-3 28s infinite linear;
 }
 .flight-3b {
-  offset-path: path('M 200,1100 L 1400,1100');
+  offset-path: path('M 100,1100 Q 800,1300 1500,1100');
   animation: fly-route-3 28s infinite linear;
   animation-delay: -14s;
 }
@@ -154,63 +154,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
 .flight-2 .plane-svg, .flight-2b .plane-svg { fill: #FF6B35; }
 .flight-3 .plane-svg, .flight-3b .plane-svg { fill: #9D6FF0; }
 
-.flight-1 .plane-wrapper, .flight-1b .plane-wrapper { transform: rotate(90deg); }
-.flight-2 .plane-wrapper, .flight-2b .plane-wrapper { transform: rotate(0deg); filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6)); animation-name: radar-pulse-orange; }
-.flight-3 .plane-wrapper, .flight-3b .plane-wrapper { transform: rotate(90deg); filter: drop-shadow(0 0 6px rgba(123, 69, 232, 0.6)); animation-name: radar-pulse-purple; }
+.flight-1 .plane-wrapper, .flight-1b .plane-wrapper { filter: drop-shadow(0 0 6px rgba(0, 201, 255, 0.6)); }
+.flight-2 .plane-wrapper, .flight-2b .plane-wrapper { filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6)); }
+.flight-3 .plane-wrapper, .flight-3b .plane-wrapper { filter: drop-shadow(0 0 6px rgba(123, 69, 232, 0.6)); }
 
-@keyframes radar-pulse{0%,100%{opacity:0.6;transform:rotate(90deg) scale(0.9)}50%{opacity:1;transform:rotate(90deg) scale(1.1)}}
-@keyframes radar-pulse-orange{0%,100%{opacity:0.6;transform:rotate(0deg) scale(0.9)}50%{opacity:1;transform:rotate(0deg) scale(1.1)}}
-@keyframes radar-pulse-purple{0%,100%{opacity:0.6;transform:rotate(90deg) scale(0.9)}50%{opacity:1;transform:rotate(90deg) scale(1.1)}}
-
-/* Flight Tag styling */
-.radar-tag-container {
-  position: absolute;
-  left: 20px;
-  top: -40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  pointer-events: none;
-}
-.radar-tag-container::before {
-  content: '';
-  position: absolute;
-  left: -15px;
-  bottom: -5px;
-  width: 15px;
-  height: 15px;
-  border-left: 1px solid rgba(0, 201, 255, 0.4);
-  border-bottom: 1px solid rgba(0, 201, 255, 0.4);
-}
-.flight-2 .radar-tag-container::before, .flight-2b .radar-tag-container::before {
-  border-left-color: rgba(255, 107, 53, 0.4);
-  border-bottom-color: rgba(255, 107, 53, 0.4);
-}
-.flight-3 .radar-tag-container::before, .flight-3b .radar-tag-container::before {
-  border-left-color: rgba(123, 69, 232, 0.4);
-  border-bottom-color: rgba(123, 69, 232, 0.4);
-}
-
-.radar-tag-card {
-  background: rgba(6, 12, 26, 0.85);
-  border: 1px solid rgba(0, 201, 255, 0.3);
-  padding: 6px 10px;
-  border-radius: 4px;
-  width: 125px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
-}
-.flight-2 .radar-tag-card, .flight-2b .radar-tag-card { border-color: rgba(255, 107, 53, 0.3); }
-.flight-3 .radar-tag-card, .flight-3b .radar-tag-card { border-color: rgba(123, 69, 232, 0.3); }
-
-.tag-callsign { font-size: 8.5px; font-weight: 700; color: #00C9FF; margin-bottom: 2px; }
-.flight-2 .tag-callsign, .flight-2b .tag-callsign { color: #FF6B35; }
-.flight-3 .tag-callsign, .flight-3b .tag-callsign { color: #9D6FF0; }
-
-.tag-details { font-size: 7.5px; color: rgba(255, 255, 255, 0.7); margin-bottom: 2px; line-height: 1.1; font-family: sans-serif; }
-.tag-status { font-size: 7px; font-weight: 600; text-transform: uppercase; font-family: sans-serif; }
-.tag-status.status-green { color: #00D4A0; }
-.tag-status.status-orange { color: #FF6B35; }
+@keyframes radar-pulse{0%,100%{opacity:0.6;transform:scale(0.85)}50%{opacity:1;transform:scale(1.1)}}
 
 .efb-hdr{background:#0F2040;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08)}
 .efb-logo{font-size:12.5px;font-weight:700;color:#00C9FF;letter-spacing:0.08em;text-transform:uppercase}
@@ -602,39 +550,45 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
         <text x="325" y="803" fill="rgba(255,255,255,0.25)" font-family="'Poppins'" font-size="9" font-weight="600" text-anchor="end">270° (W)</text>
         
         <!-- Airway Routes -->
-        <path d="M 100,200 L 1500,200" fill="none" stroke="rgba(0, 201, 255, 0.08)" stroke-width="1.5" stroke-dasharray="8 8" />
-        <text x="250" y="185" fill="rgba(0, 201, 255, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600">AIRWAY J82 (ALT: FL320)</text>
+        <path id="airway-j82" d="M 100,300 Q 800,100 1500,300" fill="none" stroke="rgba(0, 201, 255, 0.08)" stroke-width="1.5" stroke-dasharray="8 8" />
+        <text fill="rgba(0, 201, 255, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600" dy="-6">
+          <textPath href="#airway-j82" startOffset="30%">AIRWAY J82 (ALT: FL320)</textPath>
+        </text>
         
-        <path d="M 150,1400 L 150,200" fill="none" stroke="rgba(123, 69, 232, 0.1)" stroke-width="1.5" stroke-dasharray="6 6" />
-        <text x="170" y="1000" fill="rgba(123, 69, 232, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600" transform="rotate(-90, 170, 1000)">V14 CORRIDOR (ALT: FL380)</text>
+        <path id="corridor-v14" d="M 350,1400 Q 150,800 350,200" fill="none" stroke="rgba(123, 69, 232, 0.1)" stroke-width="1.5" stroke-dasharray="6 6" />
+        <text fill="rgba(123, 69, 232, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600" dy="-6">
+          <textPath href="#corridor-v14" startOffset="25%">V14 CORRIDOR (ALT: FL380)</textPath>
+        </text>
         
-        <path d="M 200,1100 L 1400,1100" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" stroke-dasharray="6 6" />
-        <text x="250" y="1085" fill="rgba(255, 107, 53, 0.2)" font-family="'Poppins'" font-size="8" font-weight="600">JET ROUTE Q29 (ALT: FL360)</text>
+        <path id="route-q29" d="M 100,1100 Q 800,1300 1500,1100" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" stroke-dasharray="6 6" />
+        <text fill="rgba(255, 107, 53, 0.2)" font-family="'Poppins'" font-size="8" font-weight="600" dy="-6">
+          <textPath href="#route-q29" startOffset="30%">JET ROUTE Q29 (ALT: FL360)</textPath>
+        </text>
         
         <!-- Waypoints (Triangle Fixes) -->
         <!-- Fix 1: ORCKY -->
-        <g transform="translate(450, 200)">
+        <g transform="translate(450, 225)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 201, 255, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">ORCKY</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">N52.4°</text>
         </g>
         
         <!-- Fix 2: KENNO -->
-        <g transform="translate(1150, 200)">
+        <g transform="translate(1150, 225)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(123, 69, 232, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">KENNO</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">FL350</text>
         </g>
 
         <!-- Fix 3: BUMAN -->
-        <g transform="translate(800, 1100)">
+        <g transform="translate(800, 1200)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(255, 107, 53, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">BUMAN</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">E012.8°</text>
         </g>
 
         <!-- Fix 4: AMPHI -->
-        <g transform="translate(150, 650)">
+        <g transform="translate(256, 650)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 212, 160, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">AMPHI</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">W001.5°</text>
@@ -650,13 +604,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
             <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
           </svg>
         </div>
-        <div class="radar-tag-container">
-          <div class="radar-tag-card">
-            <div class="tag-callsign">✈ ST142 / A320</div>
-            <div class="tag-details">FL320 | 440KT</div>
-            <div class="tag-status status-green">✓ CERT COMPLIANT</div>
-          </div>
-        </div>
       </div>
 
       <div class="radar-flight flight-1b">
@@ -664,13 +611,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
           <svg class="plane-svg" viewBox="0 0 24 24">
             <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
           </svg>
-        </div>
-        <div class="radar-tag-container">
-          <div class="radar-tag-card">
-            <div class="tag-callsign">✈ AA182 / B738</div>
-            <div class="tag-details">FL340 | 450KT</div>
-            <div class="tag-status status-green">✓ CERT COMPLIANT</div>
-          </div>
         </div>
       </div>
       
@@ -680,13 +620,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
             <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
           </svg>
         </div>
-        <div class="radar-tag-container">
-          <div class="radar-tag-card">
-            <div class="tag-callsign">✈ LH490 / B77W</div>
-            <div class="tag-details">FL360 | 480KT</div>
-            <div class="tag-status status-orange">⚠ LPC DUE 14d</div>
-          </div>
-        </div>
       </div>
 
       <div class="radar-flight flight-2b">
@@ -694,13 +627,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
           <svg class="plane-svg" viewBox="0 0 24 24">
             <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
           </svg>
-        </div>
-        <div class="radar-tag-container">
-          <div class="radar-tag-card">
-            <div class="tag-callsign">✈ EK201 / A388</div>
-            <div class="tag-details">FL400 | 500KT</div>
-            <div class="tag-status status-green">✓ SIM CHECK OK</div>
-          </div>
         </div>
       </div>
       
@@ -710,13 +636,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
             <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
           </svg>
         </div>
-        <div class="radar-tag-container">
-          <div class="radar-tag-card">
-            <div class="tag-callsign">✈ QA071 / A350</div>
-            <div class="tag-details">FL380 | 490KT</div>
-            <div class="tag-status status-green">✓ SIM CHECK OK</div>
-          </div>
-        </div>
       </div>
 
       <div class="radar-flight flight-3b">
@@ -724,13 +643,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
           <svg class="plane-svg" viewBox="0 0 24 24">
             <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
           </svg>
-        </div>
-        <div class="radar-tag-container">
-          <div class="radar-tag-card">
-            <div class="tag-callsign">✈ BA175 / B789</div>
-            <div class="tag-details">FL360 | 460KT</div>
-            <div class="tag-status status-green">✓ CERT COMPLIANT</div>
-          </div>
         </div>
       </div>
     </div>
