@@ -74,6 +74,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
 .av-visual{position:relative;width:100%;max-width:820px;margin:0 auto;perspective:1500px}
 .efb-tablet{background:#0C1A30;border-radius:24px;border:10px solid #1E293B;box-shadow:0 35px 70px -15px rgba(0,0,0,0.8), 0 0 55px rgba(0,199,255,0.06);overflow:hidden;transform:rotateY(12deg) rotateX(6deg) rotateZ(-2deg);transition:transform 0.4s ease;width:100%}
 .efb-tablet:hover{transform:rotateY(4deg) rotateX(2deg) rotateZ(-0.5deg) scale(1.025)}
+.efb-status-bar{background:#091224;padding:6px 20px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);border-bottom:1px solid rgba(255,255,255,0.04);letter-spacing:0.05em}
+.efb-status-left,.efb-status-center,.efb-status-right{display:flex;align-items:center;gap:8px}
 .efb-hdr{background:#0F2040;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08)}
 .efb-logo{font-size:12.5px;font-weight:700;color:#00C9FF;letter-spacing:0.08em;text-transform:uppercase}
 .efb-time{font-size:12px;color:rgba(255,255,255,0.6);font-weight:500}
@@ -442,17 +444,73 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <!-- SVG overlay with flight paths and waypoints -->
+    <svg class="flight-paths-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.45;z-index:1;">
+      <!-- Concentric radar circles in top right -->
+      <circle cx="1150" cy="220" r="100" fill="none" stroke="rgba(0, 201, 255, 0.08)" stroke-width="1" stroke-dasharray="4 8" />
+      <circle cx="1150" cy="220" r="200" fill="none" stroke="rgba(0, 201, 255, 0.05)" stroke-width="1" />
+      <circle cx="1150" cy="220" r="300" fill="none" stroke="rgba(0, 201, 255, 0.03)" stroke-width="1" stroke-dasharray="2 4" />
+      <line x1="1150" y1="20" x2="1150" y2="420" stroke="rgba(0, 201, 255, 0.03)" stroke-width="1" />
+      <line x1="950" y1="220" x2="1350" y2="220" stroke="rgba(0, 201, 255, 0.03)" stroke-width="1" />
+      
+      <!-- Airway Routes (Airways) -->
+      <path d="M-50,550 C 300,450 500,650 900,350 C 1100,200 1300,250 1500,150" fill="none" stroke="rgba(123, 69, 232, 0.14)" stroke-width="1.5" stroke-dasharray="6 6" />
+      <path d="M300,-50 C 400,250 650,400 1000,500 C 1150,550 1250,800 1400,950" fill="none" stroke="rgba(0, 201, 255, 0.12)" stroke-width="1.5" stroke-dasharray="4 4" />
+      <path d="M100,-50 C 250,150 350,450 100,750" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" />
+      
+      <!-- Waypoints (Triangle Fixes) -->
+      <g transform="translate(860, 365)">
+        <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 201, 255, 0.4)" stroke-width="1.5" />
+        <text x="10" y="4" font-family="'Poppins', sans-serif" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.25)" letter-spacing="0.05em">KENNO</text>
+        <text x="10" y="13" font-family="'Poppins', sans-serif" font-size="7.5" fill="rgba(255, 255, 255, 0.15)">FL350</text>
+      </g>
+      <g transform="translate(320, 500)">
+        <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(123, 69, 232, 0.4)" stroke-width="1.5" />
+        <text x="10" y="4" font-family="'Poppins', sans-serif" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.25)" letter-spacing="0.05em">ORCKY</text>
+        <text x="10" y="13" font-family="'Poppins', sans-serif" font-size="7.5" fill="rgba(255, 255, 255, 0.15)">N52.4°</text>
+      </g>
+      <g transform="translate(1040, 515)">
+        <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(255, 107, 53, 0.4)" stroke-width="1.5" />
+        <text x="10" y="4" font-family="'Poppins', sans-serif" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.25)" letter-spacing="0.05em">BUMAN</text>
+        <text x="10" y="13" font-family="'Poppins', sans-serif" font-size="7.5" fill="rgba(255, 255, 255, 0.15)">E012.8°</text>
+      </g>
+      
+      <!-- Compass Rose -->
+      <g transform="translate(120, 220)" opacity="0.25">
+        <circle cx="0" cy="0" r="24" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
+        <line x1="0" y1="-28" x2="0" y2="28" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
+        <line x1="-28" y1="0" x2="28" y2="0" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
+        <text x="-3" y="-32" font-family="'Poppins', sans-serif" font-size="8" fill="rgba(255, 255, 255, 0.3)">N</text>
+      </g>
+    </svg>
+  </div>
   <div class="c">
     <div class="hero-grid">
       <!-- Left side: The beautiful Aviation Roster EFB visual -->
       <div class="reveal">
         <div class="av-visual">
           <div class="efb-tablet">
+            <div class="efb-status-bar">
+              <div class="efb-status-left">
+                <span>📶 LTE</span>
+                <span>✈️ Flight Mode</span>
+              </div>
+              <div class="efb-status-center">
+                <span>🛰️ GPS: LOCKED</span>
+                <span style="margin-left: 8px;">DB CYCLE: 2606</span>
+              </div>
+              <div class="efb-status-right">
+                <span>🔋 87%</span>
+              </div>
+            </div>
             <div class="efb-hdr">
-              <div class="efb-logo">✈ SimpliTrain Flight Deck EFB</div>
+              <div class="efb-logo">✈ SimpliTrain EFB v4.2</div>
               <div class="efb-time">10:42 UTC</div>
-              <div class="efb-badge">Compliance readiness: ok</div>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <div class="efb-badge" style="background: rgba(0, 201, 255, 0.15); color: #00C9FF;">DB: 2606</div>
+                <div class="efb-badge">FAA PART 121</div>
+              </div>
             </div>
             <div class="efb-body">
               <!-- Left Column: Compliance Stats Visual Ring -->
