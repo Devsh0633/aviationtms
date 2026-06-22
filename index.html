@@ -76,6 +76,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
 .efb-tablet:hover{transform:rotateY(4deg) rotateX(2deg) rotateZ(-0.5deg) scale(1.025)}
 .efb-status-bar{background:#091224;padding:6px 20px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);border-bottom:1px solid rgba(255,255,255,0.04);letter-spacing:0.05em}
 .efb-status-left,.efb-status-center,.efb-status-right{display:flex;align-items:center;gap:8px}
+
+/* Tactical Radar Background Styles */
+.radar-container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1600px;height:1600px;pointer-events:none;z-index:1;opacity:0.6}
+.radar-sweep{position:absolute;inset:0;background:conic-gradient(from 0deg,rgba(0,201,255,0.1) 0%,rgba(123,69,232,0.02) 12%,transparent 30%,transparent 100%);border-radius:50%;animation:radar-spin 12s linear infinite;transform-origin:center center}
+@keyframes radar-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.radar-blip{animation:radar-pulse 2s infinite ease-in-out}
+@keyframes radar-pulse{0%,100%{opacity:0.4;filter:drop-shadow(0 0 2px rgba(0,201,255,0.4))}50%{opacity:1;filter:drop-shadow(0 0 8px rgba(0,201,255,0.8))}}
+.radar-blip-orange{animation:radar-pulse-orange 2.5s infinite ease-in-out}
+@keyframes radar-pulse-orange{0%,100%{opacity:0.4;filter:drop-shadow(0 0 2px rgba(255,107,53,0.4))}50%{opacity:1;filter:drop-shadow(0 0 8px rgba(255,107,53,0.8))}}
+.radar-blip-purple{animation:radar-pulse-purple 3s infinite ease-in-out}
+@keyframes radar-pulse-purple{0%,100%{opacity:0.4;filter:drop-shadow(0 0 2px rgba(123,69,232,0.4))}50%{opacity:1;filter:drop-shadow(0 0 8px rgba(123,69,232,0.8))}}
+
 .efb-hdr{background:#0F2040;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08)}
 .efb-logo{font-size:12.5px;font-weight:700;color:#00C9FF;letter-spacing:0.08em;text-transform:uppercase}
 .efb-time{font-size:12px;color:rgba(255,255,255,0.6);font-weight:500}
@@ -511,45 +523,113 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <section class="hero">
   <div class="hero-bg">
-    <!-- SVG overlay with flight paths and waypoints -->
-    <svg class="flight-paths-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.45;z-index:1;">
-      <!-- Concentric radar circles in top right -->
-      <circle cx="1150" cy="220" r="100" fill="none" stroke="rgba(0, 201, 255, 0.08)" stroke-width="1" stroke-dasharray="4 8" />
-      <circle cx="1150" cy="220" r="200" fill="none" stroke="rgba(0, 201, 255, 0.05)" stroke-width="1" />
-      <circle cx="1150" cy="220" r="300" fill="none" stroke="rgba(0, 201, 255, 0.03)" stroke-width="1" stroke-dasharray="2 4" />
-      <line x1="1150" y1="20" x2="1150" y2="420" stroke="rgba(0, 201, 255, 0.03)" stroke-width="1" />
-      <line x1="950" y1="220" x2="1350" y2="220" stroke="rgba(0, 201, 255, 0.03)" stroke-width="1" />
-      
-      <!-- Airway Routes (Airways) -->
-      <path d="M-50,550 C 300,450 500,650 900,350 C 1100,200 1300,250 1500,150" fill="none" stroke="rgba(123, 69, 232, 0.14)" stroke-width="1.5" stroke-dasharray="6 6" />
-      <path d="M300,-50 C 400,250 650,400 1000,500 C 1150,550 1250,800 1400,950" fill="none" stroke="rgba(0, 201, 255, 0.12)" stroke-width="1.5" stroke-dasharray="4 4" />
-      <path d="M100,-50 C 250,150 350,450 100,750" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" />
-      
-      <!-- Waypoints (Triangle Fixes) -->
-      <g transform="translate(860, 365)">
-        <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 201, 255, 0.4)" stroke-width="1.5" />
-        <text x="10" y="4" font-family="'Poppins', sans-serif" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.25)" letter-spacing="0.05em">KENNO</text>
-        <text x="10" y="13" font-family="'Poppins', sans-serif" font-size="7.5" fill="rgba(255, 255, 255, 0.15)">FL350</text>
-      </g>
-      <g transform="translate(320, 500)">
-        <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(123, 69, 232, 0.4)" stroke-width="1.5" />
-        <text x="10" y="4" font-family="'Poppins', sans-serif" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.25)" letter-spacing="0.05em">ORCKY</text>
-        <text x="10" y="13" font-family="'Poppins', sans-serif" font-size="7.5" fill="rgba(255, 255, 255, 0.15)">N52.4°</text>
-      </g>
-      <g transform="translate(1040, 515)">
-        <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(255, 107, 53, 0.4)" stroke-width="1.5" />
-        <text x="10" y="4" font-family="'Poppins', sans-serif" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.25)" letter-spacing="0.05em">BUMAN</text>
-        <text x="10" y="13" font-family="'Poppins', sans-serif" font-size="7.5" fill="rgba(255, 255, 255, 0.15)">E012.8°</text>
-      </g>
-      
-      <!-- Compass Rose -->
-      <g transform="translate(120, 220)" opacity="0.25">
-        <circle cx="0" cy="0" r="24" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
-        <line x1="0" y1="-28" x2="0" y2="28" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
-        <line x1="-28" y1="0" x2="28" y2="0" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
-        <text x="-3" y="-32" font-family="'Poppins', sans-serif" font-size="8" fill="rgba(255, 255, 255, 0.3)">N</text>
-      </g>
-    </svg>
+    <div class="radar-container">
+      <div class="radar-sweep"></div>
+      <svg class="radar-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+        <!-- Concentric rings -->
+        <circle cx="800" cy="800" r="150" fill="none" stroke="rgba(0, 201, 255, 0.08)" stroke-width="1" stroke-dasharray="3 6" />
+        <circle cx="800" cy="800" r="300" fill="none" stroke="rgba(0, 201, 255, 0.05)" stroke-width="1.2" />
+        <circle cx="800" cy="800" r="450" fill="none" stroke="rgba(0, 201, 255, 0.07)" stroke-width="1" stroke-dasharray="4 8" />
+        <circle cx="800" cy="800" r="600" fill="none" stroke="rgba(0, 201, 255, 0.04)" stroke-width="1.2" />
+        <circle cx="800" cy="800" r="750" fill="none" stroke="rgba(0, 201, 255, 0.02)" stroke-width="1" stroke-dasharray="2 6" />
+        
+        <!-- Radar grid lines -->
+        <line x1="50" y1="800" x2="1550" y2="800" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1.2" />
+        <line x1="800" y1="50" x2="800" y2="1550" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1.2" />
+        
+        <!-- Compass Ticks / Headings -->
+        <text x="800" y="325" fill="rgba(255,255,255,0.25)" font-family="'Poppins'" font-size="9" font-weight="600" text-anchor="middle">360° (N)</text>
+        <text x="1275" y="803" fill="rgba(255,255,255,0.25)" font-family="'Poppins'" font-size="9" font-weight="600" text-anchor="start">090° (E)</text>
+        <text x="800" y="1285" fill="rgba(255,255,255,0.25)" font-family="'Poppins'" font-size="9" font-weight="600" text-anchor="middle">180° (S)</text>
+        <text x="325" y="803" fill="rgba(255,255,255,0.25)" font-family="'Poppins'" font-size="9" font-weight="600" text-anchor="end">270° (W)</text>
+        
+        <!-- Airway Routes -->
+        <path d="M 100,500 L 1500,1100" fill="none" stroke="rgba(123, 69, 232, 0.12)" stroke-width="1.5" stroke-dasharray="8 8" />
+        <text x="250" y="550" fill="rgba(123, 69, 232, 0.3)" font-family="'Poppins'" font-size="8" font-weight="600" transform="rotate(22.6, 250, 550)">AIRWAY J82</text>
+        
+        <path d="M 400,1500 L 1200,100" fill="none" stroke="rgba(0, 201, 255, 0.1)" stroke-width="1.5" stroke-dasharray="6 6" />
+        <text x="500" y="1300" fill="rgba(0, 201, 255, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600" transform="rotate(-60.2, 500, 1300)">V14 CORRIDOR</text>
+        
+        <path d="M 150,950 Q 800,450 1450,850" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" />
+        <text x="450" y="710" fill="rgba(255, 107, 53, 0.2)" font-family="'Poppins'" font-size="8" font-weight="600">JET ROUTE Q29</text>
+        
+        <!-- Waypoints (Triangle Fixes) -->
+        <!-- Fix 1: ORCKY -->
+        <g transform="translate(500, 650)">
+          <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 201, 255, 0.5)" stroke-width="1.8" />
+          <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">ORCKY</text>
+          <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">N52.4°</text>
+        </g>
+        
+        <!-- Fix 2: KENNO -->
+        <g transform="translate(1100, 500)">
+          <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(123, 69, 232, 0.5)" stroke-width="1.8" />
+          <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">KENNO</text>
+          <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">FL350</text>
+        </g>
+
+        <!-- Fix 3: BUMAN -->
+        <g transform="translate(950, 1050)">
+          <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(255, 107, 53, 0.5)" stroke-width="1.8" />
+          <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">BUMAN</text>
+          <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">E012.8°</text>
+        </g>
+
+        <!-- Fix 4: AMPHI -->
+        <g transform="translate(450, 1100)">
+          <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 212, 160, 0.5)" stroke-width="1.8" />
+          <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">AMPHI</text>
+          <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">W001.5°</text>
+        </g>
+        
+        <!-- Active Flights (ATC targets) -->
+        <!-- Flight 1 (Blue) -->
+        <g transform="translate(530, 615)" class="radar-blip">
+          <!-- Plane Icon outline -->
+          <circle cx="0" cy="0" r="4" fill="#00C9FF" />
+          <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(0, 201, 255, 0.3)" stroke-width="1" />
+        </g>
+        <g transform="translate(530, 615)">
+          <polyline points="0,0 20,-20 80,-20" fill="none" stroke="rgba(0, 201, 255, 0.3)" stroke-width="1" />
+          <g transform="translate(85, -35)">
+            <rect x="0" y="0" width="115" height="38" fill="rgba(6, 12, 26, 0.85)" stroke="rgba(0, 201, 255, 0.3)" stroke-width="1" rx="4" />
+            <text x="8" y="14" fill="#00C9FF" font-family="'Poppins'" font-size="9" font-weight="700" letter-spacing="0.02em">✈ ST142 / A320</text>
+            <text x="8" y="23" fill="rgba(255,255,255,0.7)" font-family="'Poppins'" font-size="7.5">ALT: FL320 | SPD: 440KT</text>
+            <text x="8" y="31" fill="#00D4A0" font-family="'Poppins'" font-size="7" font-weight="600">✓ CERT COMPLIANT</text>
+          </g>
+        </g>
+
+        <!-- Flight 2 (Orange) -->
+        <g transform="translate(1050, 560)" class="radar-blip-orange">
+          <circle cx="0" cy="0" r="4" fill="#FF6B35" />
+          <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1" />
+        </g>
+        <g transform="translate(1050, 560)">
+          <polyline points="0,0 20,-20 80,-20" fill="none" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1" />
+          <g transform="translate(85, -35)">
+            <rect x="0" y="0" width="115" height="38" fill="rgba(6, 12, 26, 0.85)" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1" rx="4" />
+            <text x="8" y="14" fill="#FF6B35" font-family="'Poppins'" font-size="9" font-weight="700" letter-spacing="0.02em">✈ LH490 / B77W</text>
+            <text x="8" y="23" fill="rgba(255,255,255,0.7)" font-family="'Poppins'" font-size="7.5">ALT: FL360 | SPD: 480KT</text>
+            <text x="8" y="31" fill="#FF6B35" font-family="'Poppins'" font-size="7" font-weight="600">⚠ LPC DUE 14d</text>
+          </g>
+        </g>
+
+        <!-- Flight 3 (Purple) -->
+        <g transform="translate(420, 1140)" class="radar-blip-purple">
+          <circle cx="0" cy="0" r="4" fill="#9D6FF0" />
+          <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(123, 69, 232, 0.3)" stroke-width="1" />
+        </g>
+        <g transform="translate(420, 1140)">
+          <polyline points="0,0 -20,-20 -80,-20" fill="none" stroke="rgba(123, 69, 232, 0.3)" stroke-width="1" />
+          <g transform="translate(-205, -35)">
+            <rect x="0" y="0" width="120" height="38" fill="rgba(6, 12, 26, 0.85)" stroke="rgba(123, 69, 232, 0.3)" stroke-width="1" rx="4" />
+            <text x="8" y="14" fill="#9D6FF0" font-family="'Poppins'" font-size="9" font-weight="700" letter-spacing="0.02em">✈ QA071 / A350</text>
+            <text x="8" y="23" fill="rgba(255,255,255,0.7)" font-family="'Poppins'" font-size="7.5">ALT: FL380 | SPD: 490KT</text>
+            <text x="8" y="31" fill="#00D4A0" font-family="'Poppins'" font-size="7" font-weight="600">✓ SIM CHECK OK</text>
+          </g>
+        </g>
+      </svg>
+    </div>
   </div>
   <div class="c">
     <div class="hero-grid">
