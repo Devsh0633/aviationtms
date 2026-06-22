@@ -92,15 +92,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
   z-index: 10;
 }
 .flight-1 {
-  offset-path: path('M 100,500 L 1500,1100');
+  offset-path: path('M 100,200 L 1500,200');
   animation: fly-route-1 24s infinite linear;
 }
 .flight-2 {
-  offset-path: path('M 1200,100 L 400,1500');
+  offset-path: path('M 150,1400 L 150,200');
   animation: fly-route-2 20s infinite linear;
 }
 .flight-3 {
-  offset-path: path('M 150,950 Q 800,450 1450,850');
+  offset-path: path('M 200,1350 L 1400,1350');
   animation: fly-route-3 28s infinite linear;
 }
 @keyframes fly-route-1 {
@@ -139,12 +139,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
 .flight-2 .plane-svg { fill: #FF6B35; }
 .flight-3 .plane-svg { fill: #9D6FF0; }
 
-.flight-1 .plane-wrapper { transform: rotate(113deg); }
-.flight-2 .plane-wrapper { transform: rotate(210deg); filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6)); animation-name: radar-pulse-orange; }
+.flight-1 .plane-wrapper { transform: rotate(90deg); }
+.flight-2 .plane-wrapper { transform: rotate(0deg); filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6)); animation-name: radar-pulse-orange; }
 .flight-3 .plane-wrapper { transform: rotate(90deg); filter: drop-shadow(0 0 6px rgba(123, 69, 232, 0.6)); animation-name: radar-pulse-purple; }
 
-@keyframes radar-pulse{0%,100%{opacity:0.6;transform:rotate(113deg) scale(0.9)}50%{opacity:1;transform:rotate(113deg) scale(1.1)}}
-@keyframes radar-pulse-orange{0%,100%{opacity:0.6;transform:rotate(210deg) scale(0.9)}50%{opacity:1;transform:rotate(210deg) scale(1.1)}}
+@keyframes radar-pulse{0%,100%{opacity:0.6;transform:rotate(90deg) scale(0.9)}50%{opacity:1;transform:rotate(90deg) scale(1.1)}}
+@keyframes radar-pulse-orange{0%,100%{opacity:0.6;transform:rotate(0deg) scale(0.9)}50%{opacity:1;transform:rotate(0deg) scale(1.1)}}
 @keyframes radar-pulse-purple{0%,100%{opacity:0.6;transform:rotate(90deg) scale(0.9)}50%{opacity:1;transform:rotate(90deg) scale(1.1)}}
 
 /* Flight Tag styling */
@@ -653,39 +653,39 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
         <text x="325" y="803" fill="rgba(255,255,255,0.25)" font-family="'Poppins'" font-size="9" font-weight="600" text-anchor="end">270° (W)</text>
         
         <!-- Airway Routes -->
-        <path d="M 100,500 L 1500,1100" fill="none" stroke="rgba(123, 69, 232, 0.12)" stroke-width="1.5" stroke-dasharray="8 8" />
-        <text x="250" y="550" fill="rgba(123, 69, 232, 0.3)" font-family="'Poppins'" font-size="8" font-weight="600" transform="rotate(22.6, 250, 550)">AIRWAY J82</text>
+        <path d="M 100,200 L 1500,200" fill="none" stroke="rgba(0, 201, 255, 0.08)" stroke-width="1.5" stroke-dasharray="8 8" />
+        <text x="250" y="185" fill="rgba(0, 201, 255, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600">AIRWAY J82 (ALT: FL320)</text>
         
-        <path d="M 400,1500 L 1200,100" fill="none" stroke="rgba(0, 201, 255, 0.1)" stroke-width="1.5" stroke-dasharray="6 6" />
-        <text x="500" y="1300" fill="rgba(0, 201, 255, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600" transform="rotate(-60.2, 500, 1300)">V14 CORRIDOR</text>
+        <path d="M 150,1400 L 150,200" fill="none" stroke="rgba(123, 69, 232, 0.1)" stroke-width="1.5" stroke-dasharray="6 6" />
+        <text x="170" y="1000" fill="rgba(123, 69, 232, 0.25)" font-family="'Poppins'" font-size="8" font-weight="600" transform="rotate(-90, 170, 1000)">V14 CORRIDOR (ALT: FL380)</text>
         
-        <path d="M 150,950 Q 800,450 1450,850" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" />
-        <text x="450" y="710" fill="rgba(255, 107, 53, 0.2)" font-family="'Poppins'" font-size="8" font-weight="600">JET ROUTE Q29</text>
+        <path d="M 200,1350 L 1400,1350" fill="none" stroke="rgba(255, 107, 53, 0.08)" stroke-width="1.5" stroke-dasharray="6 6" />
+        <text x="250" y="1335" fill="rgba(255, 107, 53, 0.2)" font-family="'Poppins'" font-size="8" font-weight="600">JET ROUTE Q29 (ALT: FL360)</text>
         
         <!-- Waypoints (Triangle Fixes) -->
         <!-- Fix 1: ORCKY -->
-        <g transform="translate(500, 650)">
+        <g transform="translate(450, 200)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 201, 255, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">ORCKY</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">N52.4°</text>
         </g>
         
         <!-- Fix 2: KENNO -->
-        <g transform="translate(1100, 500)">
+        <g transform="translate(1150, 200)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(123, 69, 232, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">KENNO</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">FL350</text>
         </g>
 
         <!-- Fix 3: BUMAN -->
-        <g transform="translate(950, 1050)">
+        <g transform="translate(800, 1350)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(255, 107, 53, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">BUMAN</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">E012.8°</text>
         </g>
 
         <!-- Fix 4: AMPHI -->
-        <g transform="translate(450, 1100)">
+        <g transform="translate(150, 650)">
           <polygon points="0,-6 6,4 -6,4" fill="none" stroke="rgba(0, 212, 160, 0.5)" stroke-width="1.8" />
           <text x="10" y="4" font-family="'Poppins'" font-size="9" font-weight="600" fill="rgba(255, 255, 255, 0.3)" letter-spacing="0.05em">AMPHI</text>
           <text x="10" y="13" font-family="'Poppins'" font-size="7.5" fill="rgba(255, 255, 255, 0.2)">W001.5°</text>
