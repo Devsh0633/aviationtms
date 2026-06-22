@@ -74,19 +74,128 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;border-bottom
 .av-visual{position:relative;width:100%;max-width:820px;margin:0 auto;perspective:1500px}
 .efb-tablet{background:#0C1A30;border-radius:24px;border:10px solid #1E293B;box-shadow:0 35px 70px -15px rgba(0,0,0,0.8), 0 0 55px rgba(0,199,255,0.06);overflow:hidden;transform:rotateY(12deg) rotateX(6deg) rotateZ(-2deg);transition:transform 0.4s ease;width:100%}
 .efb-tablet:hover{transform:rotateY(4deg) rotateX(2deg) rotateZ(-0.5deg) scale(1.025)}
-.efb-status-bar{background:#091224;padding:6px 20px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);border-bottom:1px solid rgba(255,255,255,0.04);letter-spacing:0.05em}
-.efb-status-left,.efb-status-center,.efb-status-right{display:flex;align-items:center;gap:8px}
 
 /* Tactical Radar Background Styles */
 .radar-container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1600px;height:1600px;pointer-events:none;z-index:1;opacity:0.6}
 .radar-sweep{position:absolute;inset:0;background:conic-gradient(from 0deg,rgba(0,201,255,0.1) 0%,rgba(123,69,232,0.02) 12%,transparent 30%,transparent 100%);border-radius:50%;animation:radar-spin 12s linear infinite;transform-origin:center center}
 @keyframes radar-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.radar-blip{animation:radar-pulse 2s infinite ease-in-out}
-@keyframes radar-pulse{0%,100%{opacity:0.4;filter:drop-shadow(0 0 2px rgba(0,201,255,0.4))}50%{opacity:1;filter:drop-shadow(0 0 8px rgba(0,201,255,0.8))}}
-.radar-blip-orange{animation:radar-pulse-orange 2.5s infinite ease-in-out}
-@keyframes radar-pulse-orange{0%,100%{opacity:0.4;filter:drop-shadow(0 0 2px rgba(255,107,53,0.4))}50%{opacity:1;filter:drop-shadow(0 0 8px rgba(255,107,53,0.8))}}
-.radar-blip-purple{animation:radar-pulse-purple 3s infinite ease-in-out}
-@keyframes radar-pulse-purple{0%,100%{opacity:0.4;filter:drop-shadow(0 0 2px rgba(123,69,232,0.4))}50%{opacity:1;filter:drop-shadow(0 0 8px rgba(123,69,232,0.8))}}
+
+/* Animated Motion Paths for Planes */
+.radar-flight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  offset-rotate: 0deg;
+  pointer-events: none;
+  z-index: 10;
+}
+.flight-1 {
+  offset-path: path('M 100,500 L 1500,1100');
+  animation: fly-route-1 24s infinite linear;
+}
+.flight-2 {
+  offset-path: path('M 1200,100 L 400,1500');
+  animation: fly-route-2 20s infinite linear;
+}
+.flight-3 {
+  offset-path: path('M 150,950 Q 800,450 1450,850');
+  animation: fly-route-3 28s infinite linear;
+}
+@keyframes fly-route-1 {
+  0% { offset-distance: 0%; opacity: 0; }
+  4% { opacity: 1; }
+  96% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@keyframes fly-route-2 {
+  0% { offset-distance: 0%; opacity: 0; }
+  4% { opacity: 1; }
+  96% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@keyframes fly-route-3 {
+  0% { offset-distance: 0%; opacity: 0; }
+  4% { opacity: 1; }
+  96% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.plane-wrapper {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 6px rgba(0, 201, 255, 0.6));
+  animation: radar-pulse 2s infinite ease-in-out;
+}
+.plane-svg {
+  width: 20px;
+  height: 20px;
+}
+.flight-1 .plane-svg { fill: #00C9FF; }
+.flight-2 .plane-svg { fill: #FF6B35; }
+.flight-3 .plane-svg { fill: #9D6FF0; }
+
+.flight-1 .plane-wrapper { transform: rotate(113deg); }
+.flight-2 .plane-wrapper { transform: rotate(210deg); filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6)); animation-name: radar-pulse-orange; }
+.flight-3 .plane-wrapper { transform: rotate(90deg); filter: drop-shadow(0 0 6px rgba(123, 69, 232, 0.6)); animation-name: radar-pulse-purple; }
+
+@keyframes radar-pulse{0%,100%{opacity:0.6;transform:rotate(113deg) scale(0.9)}50%{opacity:1;transform:rotate(113deg) scale(1.1)}}
+@keyframes radar-pulse-orange{0%,100%{opacity:0.6;transform:rotate(210deg) scale(0.9)}50%{opacity:1;transform:rotate(210deg) scale(1.1)}}
+@keyframes radar-pulse-purple{0%,100%{opacity:0.6;transform:rotate(90deg) scale(0.9)}50%{opacity:1;transform:rotate(90deg) scale(1.1)}}
+
+/* Flight Tag styling */
+.radar-tag-container {
+  position: absolute;
+  left: 20px;
+  top: -40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+.radar-tag-container::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  bottom: -5px;
+  width: 15px;
+  height: 15px;
+  border-left: 1px solid rgba(0, 201, 255, 0.4);
+  border-bottom: 1px solid rgba(0, 201, 255, 0.4);
+}
+.flight-2 .radar-tag-container::before {
+  border-left-color: rgba(255, 107, 53, 0.4);
+  border-bottom-color: rgba(255, 107, 53, 0.4);
+}
+.flight-3 .radar-tag-container::before {
+  border-left-color: rgba(123, 69, 232, 0.4);
+  border-bottom-color: rgba(123, 69, 232, 0.4);
+}
+
+.radar-tag-card {
+  background: rgba(6, 12, 26, 0.85);
+  border: 1px solid rgba(0, 201, 255, 0.3);
+  padding: 6px 10px;
+  border-radius: 4px;
+  width: 125px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+.flight-2 .radar-tag-card { border-color: rgba(255, 107, 53, 0.3); }
+.flight-3 .radar-tag-card { border-color: rgba(123, 69, 232, 0.3); }
+
+.tag-callsign { font-size: 8.5px; font-weight: 700; color: #00C9FF; margin-bottom: 2px; }
+.flight-2 .tag-callsign { color: #FF6B35; }
+.flight-3 .tag-callsign { color: #9D6FF0; }
+
+.tag-details { font-size: 7.5px; color: rgba(255, 255, 255, 0.7); margin-bottom: 2px; line-height: 1.1; font-family: sans-serif; }
+.tag-status { font-size: 7px; font-weight: 600; text-transform: uppercase; font-family: sans-serif; }
+.tag-status.status-green { color: #00D4A0; }
+.tag-status.status-orange { color: #FF6B35; }
 
 .efb-hdr{background:#0F2040;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08)}
 .efb-logo{font-size:12.5px;font-weight:700;color:#00C9FF;letter-spacing:0.08em;text-transform:uppercase}
@@ -517,52 +626,53 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
         </g>
         
         <!-- Active Flights (ATC targets) -->
-        <!-- Flight 1 (Blue) -->
-        <g transform="translate(530, 615)" class="radar-blip">
-          <!-- Plane Icon outline -->
-          <circle cx="0" cy="0" r="4" fill="#00C9FF" />
-          <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(0, 201, 255, 0.3)" stroke-width="1" />
-        </g>
-        <g transform="translate(530, 615)">
-          <polyline points="0,0 20,-20 80,-20" fill="none" stroke="rgba(0, 201, 255, 0.3)" stroke-width="1" />
-          <g transform="translate(85, -35)">
-            <rect x="0" y="0" width="115" height="38" fill="rgba(6, 12, 26, 0.85)" stroke="rgba(0, 201, 255, 0.3)" stroke-width="1" rx="4" />
-            <text x="8" y="14" fill="#00C9FF" font-family="'Poppins'" font-size="9" font-weight="700" letter-spacing="0.02em">✈ ST142 / A320</text>
-            <text x="8" y="23" fill="rgba(255,255,255,0.7)" font-family="'Poppins'" font-size="7.5">ALT: FL320 | SPD: 440KT</text>
-            <text x="8" y="31" fill="#00D4A0" font-family="'Poppins'" font-size="7" font-weight="600">✓ CERT COMPLIANT</text>
-          </g>
-        </g>
-
-        <!-- Flight 2 (Orange) -->
-        <g transform="translate(1050, 560)" class="radar-blip-orange">
-          <circle cx="0" cy="0" r="4" fill="#FF6B35" />
-          <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1" />
-        </g>
-        <g transform="translate(1050, 560)">
-          <polyline points="0,0 20,-20 80,-20" fill="none" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1" />
-          <g transform="translate(85, -35)">
-            <rect x="0" y="0" width="115" height="38" fill="rgba(6, 12, 26, 0.85)" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1" rx="4" />
-            <text x="8" y="14" fill="#FF6B35" font-family="'Poppins'" font-size="9" font-weight="700" letter-spacing="0.02em">✈ LH490 / B77W</text>
-            <text x="8" y="23" fill="rgba(255,255,255,0.7)" font-family="'Poppins'" font-size="7.5">ALT: FL360 | SPD: 480KT</text>
-            <text x="8" y="31" fill="#FF6B35" font-family="'Poppins'" font-size="7" font-weight="600">⚠ LPC DUE 14d</text>
-          </g>
-        </g>
-
-        <!-- Flight 3 (Purple) -->
-        <g transform="translate(420, 1140)" class="radar-blip-purple">
-          <circle cx="0" cy="0" r="4" fill="#9D6FF0" />
-          <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(123, 69, 232, 0.3)" stroke-width="1" />
-        </g>
-        <g transform="translate(420, 1140)">
-          <polyline points="0,0 -20,-20 -80,-20" fill="none" stroke="rgba(123, 69, 232, 0.3)" stroke-width="1" />
-          <g transform="translate(-205, -35)">
-            <rect x="0" y="0" width="120" height="38" fill="rgba(6, 12, 26, 0.85)" stroke="rgba(123, 69, 232, 0.3)" stroke-width="1" rx="4" />
-            <text x="8" y="14" fill="#9D6FF0" font-family="'Poppins'" font-size="9" font-weight="700" letter-spacing="0.02em">✈ QA071 / A350</text>
-            <text x="8" y="23" fill="rgba(255,255,255,0.7)" font-family="'Poppins'" font-size="7.5">ALT: FL380 | SPD: 490KT</text>
-            <text x="8" y="31" fill="#00D4A0" font-family="'Poppins'" font-size="7" font-weight="600">✓ SIM CHECK OK</text>
-          </g>
-        </g>
       </svg>
+      
+      <!-- Moving Flights (Idea 4 - CSS Motion Paths) -->
+      <div class="radar-flight flight-1">
+        <div class="plane-wrapper">
+          <svg class="plane-svg" viewBox="0 0 24 24">
+            <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
+          </svg>
+        </div>
+        <div class="radar-tag-container">
+          <div class="radar-tag-card">
+            <div class="tag-callsign">✈ ST142 / A320</div>
+            <div class="tag-details">FL320 | 440KT</div>
+            <div class="tag-status status-green">✓ CERT COMPLIANT</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="radar-flight flight-2">
+        <div class="plane-wrapper">
+          <svg class="plane-svg" viewBox="0 0 24 24">
+            <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
+          </svg>
+        </div>
+        <div class="radar-tag-container">
+          <div class="radar-tag-card">
+            <div class="tag-callsign">✈ LH490 / B77W</div>
+            <div class="tag-details">FL360 | 480KT</div>
+            <div class="tag-status status-orange">⚠ LPC DUE 14d</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="radar-flight flight-3">
+        <div class="plane-wrapper">
+          <svg class="plane-svg" viewBox="0 0 24 24">
+            <path d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/>
+          </svg>
+        </div>
+        <div class="radar-tag-container">
+          <div class="radar-tag-card">
+            <div class="tag-callsign">✈ QA071 / A350</div>
+            <div class="tag-details">FL380 | 490KT</div>
+            <div class="tag-status status-green">✓ SIM CHECK OK</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="c">
