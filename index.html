@@ -528,6 +528,20 @@ nav .btn-s:hover{background:rgba(255,255,255,.08) !important;border-color:rgba(2
 .comp-text-grey{color:var(--muted);font-size:12px;font-weight:400;line-height:1.4}
 .comp-highlight-cell{background:#0088FF;color:#FFFFFF !important;font-weight:600;font-size:13.5px;line-height:1.45;text-align:center}
 
+/* ── CASE STUDIES ──────────────────────────────── */
+.case-s{padding:7rem 0;background:var(--bg)}
+.case-g{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}
+.case-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.5rem;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s,border-color .3s;box-shadow:0 12px 30px rgba(5,12,51,0.03)}
+.case-card:hover{transform:translateY(-4px);border-color:var(--bm)}
+.case-header{margin-bottom:1.5rem}
+.case-num{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;color:var(--purple);line-height:1.15;margin-bottom:.5rem}
+.case-card:nth-child(2) .case-num{color:var(--orange)}
+.case-sub{font-size:14px;color:var(--muted);line-height:1.5}
+.case-q{font-size:15px;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:1.5rem;flex-grow:1}
+.case-meta{font-size:13px;font-weight:600;color:var(--heading);margin-bottom:1rem}
+.case-read{font-size:13px;font-weight:700;color:var(--purple-l);text-decoration:none;transition:color .2s;display:inline-block}
+.case-read:hover{color:var(--purple)}
+
 /* ── PRICING ───────────────────────────────────── */
 .price-s{padding:7rem 0;background:var(--bg2)}
 .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
@@ -600,7 +614,7 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 
 /* ── RESPONSIVE ────────────────────────────────── */
 @media(max-width:960px){
-  .stats-g,.tgrid,.pgrid{grid-template-columns:1fr}
+  .stats-g,.tgrid,.pgrid,.case-g{grid-template-columns:1fr}
   .fb{flex:0 0 100%}.fb.rev .fvis{order:2}
   .igrid{grid-template-columns:repeat(2,1fr)}.rgrid{grid-template-columns:repeat(2,1fr)}
   .nav-l{display:none}.fi-row{flex-direction:column}
@@ -1288,6 +1302,35 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CASE STUDIES ═══════════════════ -->
+<section class="case-s" id="case-studies">
+  <div class="c">
+    <div class="sh reveal">
+      <div class="slabel">Case Studies</div>
+      <h2>Proven Results in<br><span class="grad">Aviation Training.</span></h2>
+    </div>
+    <div class="case-g">
+      <div class="case-card reveal">
+        <div class="case-header">
+          <div class="case-num">710,000</div>
+          <div class="case-sub">That's how many new maintenance technicians global aviation needs over the next 20 years, and most MROs can't train them fast enough.</div>
+        </div>
+        <p class="case-q">"Our senior techs were spending more hours on paperwork than on the aircraft. Now a new hire's authorization status is one click away."</p>
+        <div class="case-meta">— Director of Maintenance Training</div>
+        <a href="#" class="case-read">Read the full case study →</a>
+      </div>
+      <div class="case-card reveal" style="transition-delay:.12s">
+        <div class="case-header">
+          <div class="case-num" style="font-size: clamp(1.8rem, 2.8vw, 2.2rem); line-height: 1.25; margin-bottom: 1.25rem;">Four bases. One dashboard. Zero flagged audits.</div>
+        </div>
+        <p class="case-q">"We used to find out a certificate had expired the week it lapsed. Now we see it 90 days out, from one screen, across every base."</p>
+        <div class="case-meta">— VP, Training Operations</div>
+        <a href="#" class="case-read">Read the full case study →</a>
       </div>
     </div>
   </div>
