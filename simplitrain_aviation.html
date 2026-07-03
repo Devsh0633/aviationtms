@@ -585,44 +585,7 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
   font-size: 10px;
   font-family: 'IBM Plex Mono', monospace;
 }
-.departure-board {
-  background-color: #0A0F1A;
-  border-top: 1px solid rgba(0,191,255,0.15);
-  border-bottom: 1px solid rgba(0,191,255,0.15);
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-.dep-cell {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 12px;
-  border-right: 1px solid rgba(0,191,255,0.08);
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.dep-cell:last-child {
-  border-right: none;
-}
-.dep-type {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  color: rgba(0,191,255,0.45);
-  display: block;
-  margin-bottom: 3px;
-}
-.dep-sector {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  color: #E8E8E0;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+
 .flight-path-arc {
   position: absolute;
   top: 20px;
@@ -715,33 +678,6 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
   .runway-line-container, .flight-path-arc {
     display: none !important;
   }
-}
-@media (max-width: 768px) {
-  .departure-board {
-    flex-wrap: wrap;
-  }
-  .dep-cell {
-    flex: 0 0 50%;
-    border-bottom: 1px solid rgba(0,191,255,0.08);
-  }
-  .dep-cell:nth-child(2n) {
-    border-right: none;
-  }
-  .dep-cell:nth-last-child(-n+2) {
-    border-bottom: none;
-  }
-}
-.marq {
-  background: #0A0F1A !important;
-  border-top: 1px solid rgba(0, 191, 255, 0.15) !important;
-  border-bottom: 1px solid rgba(0, 191, 255, 0.15) !important;
-}
-.marq-lbl {
-  color: rgba(0, 191, 255, 0.7) !important;
-  font-family: 'IBM Plex Mono', monospace !important;
-  font-size: 11px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
 }
 </style>
 </head>
@@ -1031,31 +967,21 @@ footer{background:#050C33;border-top:1px solid rgba(255,255,255,0.08);padding:3r
 
 <!-- ═══════════════════ MARQUEE ═══════════════════ -->
 <div class="marq">
-  <div class="marq-lbl">Trusted by aviation training departments in</div>
-  <div class="departure-board">
-    <div class="dep-cell">
-      <span class="dep-type">TRNG</span>
-      <span class="dep-sector">Commercial Airlines</span>
-    </div>
-    <div class="dep-cell">
-      <span class="dep-type">TRNG</span>
-      <span class="dep-sector">MRO Organisations</span>
-    </div>
-    <div class="dep-cell">
-      <span class="dep-type">TRNG</span>
-      <span class="dep-sector">ATOs &amp; Flight Academies</span>
-    </div>
-    <div class="dep-cell">
-      <span class="dep-type">TRNG</span>
-      <span class="dep-sector">Helicopter Operators</span>
-    </div>
-    <div class="dep-cell">
-      <span class="dep-type">TRNG</span>
-      <span class="dep-sector">Ground Handling Ops</span>
-    </div>
-    <div class="dep-cell">
-      <span class="dep-type">TRNG</span>
-      <span class="dep-sector">Part-145 Maintenance</span>
+  <div class="marq-lbl">Trusted by</div>
+  <div style="overflow:hidden">
+    <div class="marq-t">
+      <span class="marq-item"><span>✈</span>Commercial Airlines</span>
+      <span class="marq-item"><span>🔧</span>MRO Organisations</span>
+      <span class="marq-item"><span>🎓</span>ATOs &amp; Flight Academies</span>
+      <span class="marq-item"><span>🚁</span>Helicopter Operators</span>
+      <span class="marq-item"><span>🛬</span>Ground Handling Ops</span>
+      <span class="marq-item"><span>🏭</span>Part-145 Maintenance</span>
+      <span class="marq-item"><span>✈</span>Commercial Airlines</span>
+      <span class="marq-item"><span>🔧</span>MRO Organisations</span>
+      <span class="marq-item"><span>🎓</span>ATOs &amp; Flight Academies</span>
+      <span class="marq-item"><span>🚁</span>Helicopter Operators</span>
+      <span class="marq-item"><span>🛬</span>Ground Handling Ops</span>
+      <span class="marq-item"><span>🏭</span>Part-145 Maintenance</span>
     </div>
   </div>
 </div>
